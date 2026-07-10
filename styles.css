@@ -1722,6 +1722,12 @@ body.page-amvs .particle{background:#ffd60a;}
   color:rgba(255,255,255,0.5);
   letter-spacing:0.1em;
 }
+.anime-poster-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:10px;
+}
 .anime-poster p{
   font-family:'IBM Plex Mono',monospace;
   font-size:11px;
