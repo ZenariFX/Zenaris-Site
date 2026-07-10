@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- FLOATING PARTICLES ---------- */
   const particlesContainer = document.querySelector('.particles-container');
   if (particlesContainer) {
-    const count = 25;
+    const count = 35;
     for (let i = 0; i < count; i++) {
       const p = document.createElement('div');
       p.className = 'particle';
@@ -128,8 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
       p.style.width = size + 'px';
       p.style.height = size + 'px';
       p.style.left = Math.random() * 100 + 'vw';
-      p.style.animationDuration = (Math.random() * 15 + 10) + 's';
-      p.style.animationDelay = (Math.random() * 20) + 's';
+      p.style.animationDuration = (Math.random() * 8 + 6) + 's';
+      p.style.animationDelay = (Math.random() * 4) + 's';
       p.style.setProperty('--drift', (Math.random() * 100 - 50) + 'px');
       particlesContainer.appendChild(p);
     }

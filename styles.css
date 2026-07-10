@@ -1371,13 +1371,13 @@ body.page-amvs .back-to-top:hover{color:#ffd60a;background:rgba(255,214,10,0.08)
     opacity:0;
     transform:translateY(110vh) translateX(0) scale(0.3);
   }
-  10%{
+  5%{
     opacity:0.6;
   }
   50%{
     opacity:0.4;
   }
-  90%{
+  95%{
     opacity:0.2;
   }
   100%{
