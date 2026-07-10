@@ -306,47 +306,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---------- CUSTOM CURSOR (desktop only) ---------- */
-  if (window.matchMedia('(hover: hover)').matches) {
-    let cursor = document.querySelector('.custom-cursor');
-    let cursorDot = document.querySelector('.custom-cursor-dot');
-
-    if (!cursor) {
-      cursor = document.createElement('div');
-      cursor.className = 'custom-cursor';
-      document.body.appendChild(cursor);
-    }
-    if (!cursorDot) {
-      cursorDot = document.createElement('div');
-      cursorDot.className = 'custom-cursor-dot';
-      document.body.appendChild(cursorDot);
-    }
-
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      cursorDot.style.left = mouseX + 'px';
-      cursorDot.style.top = mouseY + 'px';
-    });
-
-    const animateCursor = () => {
-      cursorX += (mouseX - cursorX) * 0.15;
-      cursorY += (mouseY - cursorY) * 0.15;
-      cursor.style.left = cursorX + 'px';
-      cursor.style.top = cursorY + 'px';
-      requestAnimationFrame(animateCursor);
-    };
-    animateCursor();
-
-    document.querySelectorAll('a, button, .clip-tile, .socials-card, .filter-toggle, .menu-toggle, .theme-toggle').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
-    });
-  }
-
   /* ---------- PAGE TRANSITION OVERLAY ---------- */
   let pageTransition = document.querySelector('.page-transition');
   if (!pageTransition) {
@@ -355,7 +314,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(pageTransition);
   }
   requestAnimationFrame(() => {
-    setTimeout(() => pageTransition.classList.add('fade-out'), 30);
+    setTimeout(() => {
+      pageTransition.classList.add('fade-out');
+      // Remove from DOM after transition to prevent any compositing issues
+      setTimeout(() => {
+        if (pageTransition && pageTransition.parentNode) {
+          pageTransition.parentNode.removeChild(pageTransition);
+        }
+      }, 350);
+    }, 30);
   });
 
   /* ---------- SMOOTH SCROLL FOR ANCHOR LINKS ---------- */
@@ -370,5 +337,21 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  /* ---------- CRITICAL FALLBACK: Force visibility if animations fail ---------- */
+  setTimeout(() => {
+    const animatedEls = document.querySelectorAll('.animate-fade-up, .animate-fade-in, .animate-scale-in');
+    let anyInvisible = false;
+    animatedEls.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      const style = window.getComputedStyle(el);
+      if (rect.height > 0 && parseFloat(style.opacity) < 0.1) {
+        anyInvisible = true;
+      }
+    });
+    if (anyInvisible) {
+      document.documentElement.classList.add('no-animate-fallback');
+    }
+  }, 1500);
 
 }); /* end DOMContentLoaded */

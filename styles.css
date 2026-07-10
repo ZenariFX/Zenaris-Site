@@ -1396,46 +1396,15 @@ body.page-amvs .particle{background:#ffd60a;}
 /* Light mode particles - use white for visibility */
 [data-theme="light"] .particle{background:rgba(255,255,255,0.7) !important;}
 
-
 /* ============================================================
-   NEW FEATURES - CURSOR, TRANSITIONS, TYPING, BORDERS, SKELETON
+   NEW FEATURES - TRANSITIONS, TYPING, BORDERS, SKELETON
    ============================================================ */
-
-/* ---------- CUSTOM CURSOR ---------- */
-.custom-cursor{
-  position:fixed;top:0;left:0;
-  width:20px;height:20px;
-  border:2px solid var(--accent);
-  border-radius:50%;
-  pointer-events:none;
-  z-index:99999;
-  transform:translate(-50%,-50%);
-  transition:width .2s ease,height .2s ease,border-color .2s ease;
-  mix-blend-mode:difference;
-}
-.custom-cursor.expanded{
-  width:50px;height:50px;
-  border-color:#fff;
-}
-.custom-cursor-dot{
-  position:fixed;top:0;left:0;
-  width:6px;height:6px;
-  background:var(--accent);
-  border-radius:50%;
-  pointer-events:none;
-  z-index:99999;
-  transform:translate(-50%,-50%);
-  mix-blend-mode:difference;
-}
-@media (hover:none) and (pointer:coarse){
-  .custom-cursor,.custom-cursor-dot{display:none!important;}
-}
 
 /* ---------- PAGE TRANSITION OVERLAY ---------- */
 .page-transition{
   position:fixed;inset:0;
   background:var(--bg);
-  z-index:99998;
+  z-index:9998;
   opacity:1;
   pointer-events:none;
   transition:opacity .3s ease;
@@ -1558,7 +1527,27 @@ body.page-amvs .particle{background:#ffd60a;}
   .clips-grid-section{padding:0 16px 40px;}
   .clip-tile-text h4{font-size:20px;}
 }
+
+/* CRITICAL FIX: Ensure content is always visible even if animations fail or reduced motion is enabled */
 @media (prefers-reduced-motion: reduce){
   *{animation:none !important;transition:none !important;}
   html{scroll-behavior:auto;}
+  .animate-fade-up,
+  .animate-fade-in,
+  .animate-scale-in,
+  .clip-card{
+    opacity:1 !important;
+    transform:none !important;
+  }
+  .particle{display:none !important;}
+}
+
+/* JS fallback class - applied by script if animations don't fire */
+.no-animate-fallback .animate-fade-up,
+.no-animate-fallback .animate-fade-in,
+.no-animate-fallback .animate-scale-in,
+.no-animate-fallback .clip-card{
+  opacity:1 !important;
+  transform:none !important;
+  animation:none !important;
 }
