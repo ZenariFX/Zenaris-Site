@@ -41,10 +41,10 @@
     <!-- Profile Image -->
     <div class="profile-section animate-fade-up d2">
       <div class="profile-avatar">
-        <img src="images/profile.jpg" alt="Zenari" onerror="this.style.display='none'">
+        <img src="images/profile.jpg" alt="Zenari" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'">
         <div class="profile-avatar-fallback">Z</div>
       </div>
-      <h2>About Me</h2>
+      <h2>About Me <span class="arrow-down">&darr;</span><span class="arrow-down">&darr;</span></h2>
     </div>
 
     <div class="about-intro animate-fade-up d3">
@@ -57,11 +57,11 @@
 
   <!-- Hobby Cards -->
   <section class="hobbies-section">
-    <h3 class="section-title animate-fade-up d3"><span class="section-icon">&#9733;</span> Current Hobbies & Interests</h3>
+    <h3 class="section-title animate-fade-up d3">Current Hobbies & Interests</h3>
     <div class="hobbies-grid">
       <div class="hobby-card animate-fade-up d4">
         <div class="hobby-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01"/><path d="M10 10h.01"/><path d="M14 10h.01"/><path d="M18 10h.01"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6"/><circle cx="12" cy="4" r="2"/><path d="M6 10h12l2 10H4l2-10z"/><path d="M8 14h.01"/><path d="M16 14h.01"/></svg>
         </div>
         <h4>Gaming</h4>
         <p>Sandbox, Rhythm, FPS, MMORPG, Survival/Adventure</p>
@@ -71,7 +71,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
         </div>
         <h4>Anime & Donghua</h4>
-        <p>Mainly watching but someday I'll read</p>
+        <p>Too many favorites to list — see below!</p>
       </div>
       <div class="hobby-card animate-fade-up d6">
         <div class="hobby-icon">
@@ -85,14 +85,14 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
         </div>
         <h4>Traveling</h4>
-        <p>Sightseeing, Culture & Food</p>
+        <p>Sightseeing, Culture & Food exploration</p>
       </div>
       <div class="hobby-card animate-fade-up d8">
         <div class="hobby-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
         </div>
         <h4>Content Creation</h4>
-        <p>Creating & Sharing content online for others to enjoy</p>
+        <p>Creating & sharing content online for others to enjoy</p>
       </div>
       <div class="hobby-card animate-fade-up d8">
         <div class="hobby-icon">
@@ -109,55 +109,55 @@
 
   <!-- Anime Favorites Grid -->
   <section class="anime-favorites-section">
-    <h3 class="section-title animate-fade-up d8"><span class="section-icon">&#9829;</span> Anime Favorites</h3>
+    <h3 class="section-title animate-fade-up d8">Anime Favorites</h3>
     <p class="section-subtitle animate-fade-up d8">Some of my all-time favorites — I have too many!</p>
     <div class="anime-grid">
       <div class="anime-poster animate-fade-up d1" data-title="Hunter x Hunter">
-        <div class="anime-poster-img"><img src="images/hxh.jpg" alt="Hunter x Hunter" loading="lazy"></div>
+        <div class="anime-poster-img" style="--poster-bg:linear-gradient(150deg,#1a3a2a,#0d1a10);"><span>HxH</span></div>
         <p>Hunter x Hunter</p>
       </div>
       <div class="anime-poster animate-fade-up d2" data-title="Naruto">
-        <div class="anime-poster-img"><img src="images/naruto.jpg" alt="Naruto" loading="lazy"></div>
+        <div class="anime-poster-img" style="--poster-bg:linear-gradient(150deg,#3a1a1a,#1a0d0d);"><span>Naruto</span></div>
         <p>Naruto</p>
       </div>
       <div class="anime-poster animate-fade-up d3" data-title="Bleach">
-        <div class="anime-poster-img"><img src="images/bleach.jpg" alt="Bleach" loading="lazy"></div>
+        <div class="anime-poster-img" style="--poster-bg:linear-gradient(150deg,#1a1a3a,#0d0d1a);"><span>Bleach</span></div>
         <p>Bleach</p>
       </div>
       <div class="anime-poster animate-fade-up d4" data-title="Eighty-Six">
-        <div class="anime-poster-img"><img src="images/86.jpg" alt="Eighty-Six" loading="lazy"></div>
+        <div class="anime-poster-img" style="--poster-bg:linear-gradient(150deg,#3a2a1a,#1a100d);"><span>86</span></div>
         <p>Eighty-Six</p>
       </div>
       <div class="anime-poster animate-fade-up d5" data-title="Attack on Titan">
-        <div class="anime-poster-img"><img src="images/aot.jpg" alt="Attack on Titan" loading="lazy"></div>
+        <div class="anime-poster-img" style="--poster-bg:linear-gradient(150deg,#3a1a2a,#1a0d10);"><span>AoT</span></div>
         <p>Attack on Titan</p>
       </div>
       <div class="anime-poster animate-fade-up d6" data-title="Jujutsu Kaisen">
-        <div class="anime-poster-img"><img src="images/jjk.jpg" alt="Jujutsu Kaisen" loading="lazy"></div>
+        <div class="anime-poster-img" style="--poster-bg:linear-gradient(150deg,#2a1a3a,#100d1a);"><span>JJK</span></div>
         <p>Jujutsu Kaisen</p>
       </div>
       <div class="anime-poster animate-fade-up d7" data-title="Vinland Saga">
-        <div class="anime-poster-img"><img src="images/vinland.jpg" alt="Vinland Saga" loading="lazy"></div>
+        <div class="anime-poster-img" style="--poster-bg:linear-gradient(150deg,#2a3a1a,#101a0d);"><span>VS</span></div>
         <p>Vinland Saga</p>
       </div>
       <div class="anime-poster animate-fade-up d8" data-title="Cyberpunk: Edgerunners">
-        <div class="anime-poster-img"><img src="images/cyberpunk.jpg" alt="Cyberpunk: Edgerunners" loading="lazy"></div>
+        <div class="anime-poster-img" style="--poster-bg:linear-gradient(150deg,#3a0a3a,#1a0d1a);"><span>CP</span></div>
         <p>Cyberpunk</p>
       </div>
       <div class="anime-poster animate-fade-up d1" data-title="Fire Force">
-        <div class="anime-poster-img"><img src="images/fireforce.jpg" alt="Fire Force" loading="lazy"></div>
+        <div class="anime-poster-img" style="--poster-bg:linear-gradient(150deg,#3a2a0a,#1a100d);"><span>FF</span></div>
         <p>Fire Force</p>
       </div>
       <div class="anime-poster animate-fade-up d2" data-title="Steins;Gate">
-        <div class="anime-poster-img"><img src="images/steinsgate.jpg" alt="Steins;Gate" loading="lazy"></div>
+        <div class="anime-poster-img" style="--poster-bg:linear-gradient(150deg,#1a2a3a,#0d101a);"><span>SG</span></div>
         <p>Steins;Gate</p>
       </div>
       <div class="anime-poster animate-fade-up d3" data-title="Soul Eater">
-        <div class="anime-poster-img"><img src="images/souleater.jpg" alt="Soul Eater" loading="lazy"></div>
+        <div class="anime-poster-img" style="--poster-bg:linear-gradient(150deg,#3a3a1a,#1a1a0d);"><span>SE</span></div>
         <p>Soul Eater</p>
       </div>
       <div class="anime-poster animate-fade-up d4" data-title="Sakamoto Days">
-        <div class="anime-poster-img"><img src="images/sakamoto.jpg" alt="Sakamoto Days" loading="lazy"></div>
+        <div class="anime-poster-img" style="--poster-bg:linear-gradient(150deg,#1a3a3a,#0d1a1a);"><span>SD</span></div>
         <p>Sakamoto Days</p>
       </div>
     </div>
