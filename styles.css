@@ -1551,3 +1551,260 @@ body.page-amvs .particle{background:#ffd60a;}
   transform:none !important;
   animation:none !important;
 }
+
+/* ============================================================
+   ABOUT PAGE ENHANCEMENTS
+   ============================================================ */
+
+/* Profile Section */
+.profile-section{
+  text-align:center;
+  margin-bottom:32px;
+}
+.profile-avatar{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  margin:0 auto 20px;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(150deg,#00b4d8,#0077b6);
+  border:3px solid var(--line);
+  transition:border-color .3s ease, transform .3s ease;
+}
+.profile-avatar:hover{
+  border-color:#00b4d8;
+  transform:scale(1.05);
+}
+.profile-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:50%;
+}
+.profile-avatar-fallback{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:48px;
+  font-weight:700;
+  color:#fff;
+}
+
+/* Section Dividers */
+.section-divider{
+  max-width:200px;
+  height:1px;
+  margin:48px auto;
+  background:linear-gradient(90deg,transparent,var(--line),transparent);
+  position:relative;
+}
+.section-divider::before{
+  content:'';
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:8px;
+  height:8px;
+  background:var(--line);
+  border-radius:50%;
+}
+
+/* Section Titles */
+.section-title{
+  font-family:'VT323',monospace;
+  font-size:clamp(24px,4vw,32px);
+  font-weight:400;
+  letter-spacing:0.05em;
+  text-align:center;
+  margin-bottom:8px;
+  color:var(--ink);
+}
+.section-icon{
+  color:#00b4d8;
+  margin-right:8px;
+}
+.section-subtitle{
+  text-align:center;
+  color:var(--ink-soft);
+  font-size:14px;
+  font-family:'IBM Plex Mono',monospace;
+  margin-bottom:32px;
+}
+
+/* Hobby Cards */
+.hobbies-section{
+  padding:0 24px 48px;
+}
+.hobbies-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  max-width:720px;
+  margin:0 auto;
+}
+.hobby-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:24px 16px;
+  text-align:center;
+  transition:border-color .3s ease, transform .2s ease, background .3s ease;
+  cursor:default;
+}
+.hobby-card:hover{
+  border-color:#00b4d8;
+  transform:translateY(-4px);
+}
+.hobby-icon{
+  width:40px;
+  height:40px;
+  margin:0 auto 12px;
+  color:#00b4d8;
+}
+.hobby-icon svg{
+  width:100%;
+  height:100%;
+}
+.hobby-card h4{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:15px;
+  font-weight:600;
+  margin-bottom:6px;
+  color:var(--ink);
+}
+.hobby-card p{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  color:var(--ink-soft);
+  line-height:1.5;
+}
+
+/* Anime Favorites Grid */
+.anime-favorites-section{
+  padding:0 24px 48px;
+}
+.anime-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  max-width:720px;
+  margin:0 auto;
+}
+.anime-poster{
+  text-align:center;
+  cursor:default;
+}
+.anime-poster-img{
+  aspect-ratio:2/3;
+  border-radius:10px;
+  background:var(--poster-bg,linear-gradient(150deg,#1a1b1e,#0e0f11));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:8px;
+  border:1px solid var(--line);
+  transition:border-color .3s ease, transform .2s ease;
+  overflow:hidden;
+  position:relative;
+}
+.anime-poster:hover .anime-poster-img{
+  border-color:#00b4d8;
+  transform:translateY(-3px);
+}
+.anime-poster-img span{
+  font-family:'VT323',monospace;
+  font-size:28px;
+  color:rgba(255,255,255,0.5);
+  letter-spacing:0.1em;
+}
+.anime-poster p{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  color:var(--ink-soft);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* World Map */
+.travel-section{
+  padding:0 24px 48px;
+}
+.world-map{
+  max-width:720px;
+  margin:0 auto;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:24px;
+  overflow-x:auto;
+}
+.world-map svg{
+  width:100%;
+  height:auto;
+  min-width:600px;
+}
+.map-land{
+  fill:var(--line);
+  stroke:var(--bg);
+  stroke-width:1;
+  transition:fill .3s ease;
+}
+.map-pin{
+  fill:#00b4d8;
+  animation:pin-pulse 2s ease-in-out infinite;
+}
+@keyframes pin-pulse{
+  0%,100%{opacity:1;r:4;}
+  50%{opacity:0.6;r:5;}
+}
+
+/* Future Interests Tags */
+.future-section{
+  padding:0 24px 64px;
+}
+.future-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+  max-width:520px;
+  margin:0 auto;
+}
+.future-tag{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  padding:10px 18px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:100px;
+  color:var(--ink-soft);
+  transition:border-color .3s ease, color .3s ease, transform .2s ease;
+  cursor:default;
+}
+.future-tag:hover{
+  border-color:#00b4d8;
+  color:var(--ink);
+  transform:translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width:860px){
+  .hobbies-grid{grid-template-columns:repeat(2,1fr);}
+  .anime-grid{grid-template-columns:repeat(3,1fr);}
+}
+@media (max-width:600px){
+  .hobbies-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
+  .hobby-card{padding:18px 12px;}
+  .anime-grid{grid-template-columns:repeat(3,1fr);gap:10px;}
+  .anime-poster-img span{font-size:20px;}
+  .world-map{padding:16px;}
+  .future-tags{gap:8px;}
+  .future-tag{font-size:11px;padding:8px 14px;}
+  .profile-avatar{width:100px;height:100px;}
+}
