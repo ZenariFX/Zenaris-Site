@@ -1716,6 +1716,12 @@ body.page-amvs .particle{background:#ffd60a;}
   border-color:#00b4d8;
   transform:translateY(-3px);
 }
+.anime-poster-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
 .anime-poster-img span{
   font-family:'VT323',monospace;
   font-size:28px;
