@@ -1,5 +1,0 @@
-mkdir images/anime
-touch images/anime/.gitkeep
-git add images/anime/.gitkeep
-git commit -m "Add anime images folder"
-git push
