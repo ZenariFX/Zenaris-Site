@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Close nav when clicking outside
     document.addEventListener('click', (e) => {
       if (dropdown.classList.contains('open') && !dropdown.contains(e.target) && !menuToggle.contains(e.target)) {
         dropdown.classList.remove('open');
@@ -100,12 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.typewriter').forEach(el => {
     const text = el.getAttribute('data-text') || '';
     el.textContent = '';
-
-    // Add blinking cursor
     const cursor = document.createElement('span');
     cursor.className = 'typewriter-cursor';
     el.appendChild(cursor);
-
     let i = 0;
     const type = () => {
       if (i < text.length) {
@@ -283,7 +279,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Close on Escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && filterDropdown.classList.contains('open')) {
         filterDropdown.classList.remove('open');
@@ -316,7 +311,6 @@ document.addEventListener('DOMContentLoaded', () => {
   requestAnimationFrame(() => {
     setTimeout(() => {
       pageTransition.classList.add('fade-out');
-      // Remove from DOM after transition to prevent any compositing issues
       setTimeout(() => {
         if (pageTransition && pageTransition.parentNode) {
           pageTransition.parentNode.removeChild(pageTransition);
@@ -338,7 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ---------- CRITICAL FALLBACK: Force visibility if animations fail ---------- */
+  /* ---------- CRITICAL FALLBACK ---------- */
   setTimeout(() => {
     const animatedEls = document.querySelectorAll('.animate-fade-up, .animate-fade-in, .animate-scale-in');
     let anyInvisible = false;
@@ -354,4 +348,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, 1500);
 
-}); /* end DOMContentLoaded */
+});
