@@ -1788,28 +1788,30 @@ body.page-amvs .particle{background:#ffd60a;}
 
 .world-map{
   min-width:680px;
-  padding:16px;
+  position:relative;
 }
-.world-map svg{
+.world-map-img{
+  position:relative;
   width:100%;
-  height:auto;
+  aspect-ratio:1000/520;
+  border-radius:8px;
+  overflow:hidden;
+}
+.world-map-img img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
   display:block;
 }
-.world-map svg{
+.world-map-img .map-overlay{
+  position:absolute;
+  inset:0;
   width:100%;
-  height:auto;
-  display:block;
+  height:100%;
+  pointer-events:none;
 }
-.map-land{
-  fill:#24262b;
-  stroke:#0e0f11;
-  stroke-width:1;
-  transition:fill .3s ease;
-}
-.map-land:hover{
-  fill:#3a3d45;
-}
-
 .map-pin{
   fill:#00b4d8;
   animation:pin-pulse 2s ease-in-out infinite;
