@@ -626,7 +626,7 @@ section{padding:72px 0;}
   max-width:520px;
   margin:0 auto 32px;
   position:relative;
-  z-index:100;
+  z-index:40;
 }
 .filter-toggle{
   width:100%;
@@ -679,7 +679,7 @@ section{padding:72px 0;}
   transform:translateY(-6px);
   pointer-events:none;
   transition:opacity .18s ease, transform .18s ease;
-  z-index:100;
+  z-index:40;
   box-shadow:0 8px 32px rgba(0,0,0,0.3);
 }
 .filter-dropdown.open .filter-dropdown-menu{
@@ -1741,9 +1741,16 @@ body.page-amvs .particle{background:#ffd60a;}
 .travel-section{
   padding:0 24px 48px;
 }
-.world-map{
-  max-width:720px;
+.travel-layout{
+  display:flex;
+  gap:24px;
+  max-width:900px;
   margin:0 auto;
+  align-items:flex-start;
+}
+.world-map{
+  flex:1;
+  min-width:0;
   background:var(--card);
   border:1px solid var(--line);
   border-radius:var(--radius);
@@ -1768,6 +1775,44 @@ body.page-amvs .particle{background:#ffd60a;}
 @keyframes pin-pulse{
   0%,100%{opacity:1;r:4;}
   50%{opacity:0.6;r:5;}
+}
+
+/* Countries List */
+.countries-list{
+  width:200px;
+  flex-shrink:0;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.countries-group h4{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:#00b4d8;
+  margin-bottom:8px;
+}
+.countries-group ul{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.countries-group li{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  color:var(--ink-soft);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.list-pin{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#00b4d8;
+  flex-shrink:0;
 }
 
 /* Future Interests Tags */
@@ -1803,6 +1848,20 @@ body.page-amvs .particle{background:#ffd60a;}
 @media (max-width:860px){
   .hobbies-grid{grid-template-columns:repeat(2,1fr);}
   .anime-grid{grid-template-columns:repeat(3,1fr);}
+}
+@media (max-width:768px){
+  .travel-layout{
+    flex-direction:column;
+  }
+  .countries-list{
+    width:100%;
+    flex-direction:row;
+    flex-wrap:wrap;
+  }
+  .countries-group{
+    flex:1;
+    min-width:140px;
+  }
 }
 @media (max-width:600px){
   .hobbies-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
