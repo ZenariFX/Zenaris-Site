@@ -1809,12 +1809,7 @@ body.page-amvs .particle{background:#ffd60a;}
 .map-land:hover{
   fill:#3a3d45;
 }
-.world-map svg{
-  width:100%;
-  height:auto;
-  display:block;
-  border-radius:8px;
-}
+
 .map-pin{
   fill:#00b4d8;
   animation:pin-pulse 2s ease-in-out infinite;
