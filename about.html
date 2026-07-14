@@ -175,12 +175,17 @@
     <div class="travel-layout animate-fade-up d5">
       <div class="world-map-wrapper">
         <div class="world-map">
-          <svg viewBox="0 0 1000 520" fill="none" xmlns="http://www.w3.org/2000/svg" style="min-width:680px;">
-            <!-- Simplified World Map -->
-            <rect width="1000" height="520" fill="var(--bg)" rx="12"/>
+          <svg viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <pattern id="mapBg" width="100" height="100" patternUnits="userSpaceOnUse">
+                <rect width="100" height="100" fill="#0a0b0d"/>
+                <circle cx="50" cy="50" r="1" fill="#1a1c22" opacity="0.5"/>
+              </pattern>
+            </defs>
+            <rect width="1000" height="520" fill="url(#mapBg)" rx="12"/>
 
             <!-- Grid lines -->
-            <g stroke="var(--line)" stroke-width="0.5" opacity="0.5">
+            <g stroke="#1a1c22" stroke-width="0.5" opacity="0.6">
               <line x1="0" y1="130" x2="1000" y2="130"/>
               <line x1="0" y1="260" x2="1000" y2="260"/>
               <line x1="0" y1="390" x2="1000" y2="390"/>
@@ -203,7 +208,7 @@
             <path class="map-land" d="M545,60 C595,47 655,43 725,50 C785,57 835,70 865,90 C890,110 900,135 895,160 C890,185 875,205 850,220 C825,235 795,243 765,245 C735,247 705,240 680,230 C655,220 630,205 610,190 C590,175 575,160 565,140 C555,120 550,100 550,83 C548,70 545,63 545,60 Z"/>
             <!-- India -->
             <path class="map-land" d="M655,200 C680,195 700,203 715,220 C725,240 723,263 710,280 C695,295 675,300 660,293 C645,285 637,267 640,247 C643,227 650,210 655,200 Z"/>
-            <!-- SE Asia / Islands -->
+            <!-- SE Asia -->
             <path class="map-land" d="M725,225 C750,220 770,230 780,250 C787,270 783,290 770,305 C757,317 740,320 727,313 C715,305 710,290 713,273 C716,255 720,240 725,225 Z"/>
             <!-- Japan -->
             <path class="map-land" d="M840,115 C850,110 860,115 865,125 C870,138 867,152 860,162 C853,170 843,172 835,168 C827,162 825,150 828,138 C831,126 835,118 840,115 Z"/>
@@ -213,28 +218,28 @@
             <path class="map-land" d="M870,365 C880,360 890,365 895,375 C900,387 897,400 890,407 C883,413 873,413 865,407 C857,400 855,387 860,377 C863,369 867,365 870,365 Z"/>
 
             <!-- Country Pins & Labels -->
-            <circle class="map-pin" cx="140" cy="70" r="4"/><text x="140" y="58" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">Canada</text>
-            <circle class="map-pin" cx="130" cy="160" r="4"/><text x="130" y="148" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">Mexico</text>
-            <circle class="map-pin" cx="180" cy="240" r="4"/><text x="180" y="228" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">Colombia</text>
-            <circle class="map-pin" cx="230" cy="310" r="4"/><text x="230" y="298" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">Brazil</text>
-            <circle class="map-pin" cx="360" cy="45" r="4"/><text x="360" y="33" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">Iceland</text>
-            <circle class="map-pin" cx="445" cy="75" r="4"/><text x="445" y="63" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">Ireland</text>
-            <circle class="map-pin" cx="465" cy="95" r="4"/><text x="465" y="83" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">France</text>
-            <circle class="map-pin" cx="450" cy="105" r="4"/><text x="450" y="117" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">Spain</text>
-            <circle class="map-pin" cx="485" cy="105" r="4"/><text x="485" y="117" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">Italy</text>
-            <circle class="map-pin" cx="475" cy="80" r="4"/><text x="475" y="68" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">Germany</text>
-            <circle class="map-pin" cx="470" cy="95" r="4"/><text x="470" y="83" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">Switzerland</text>
-            <circle class="map-pin" cx="500" cy="115" r="4"/><text x="500" y="127" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">Greece</text>
-            <circle class="map-pin" cx="530" cy="110" r="4"/><text x="530" y="98" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">Turkey</text>
-            <circle class="map-pin" cx="520" cy="155" r="4"/><text x="520" y="143" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">Egypt</text>
-            <circle class="map-pin" cx="680" cy="170" r="4"/><text x="680" y="158" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">India</text>
-            <circle class="map-pin" cx="760" cy="190" r="4"/><text x="760" y="178" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">Thailand</text>
-            <circle class="map-pin" cx="800" cy="200" r="4"/><text x="800" y="188" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">Philippines</text>
-            <circle class="map-pin" cx="760" cy="130" r="4"/><text x="760" y="118" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">China</text>
-            <circle class="map-pin" cx="820" cy="125" r="4"/><text x="820" y="113" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">S. Korea</text>
-            <circle class="map-pin" cx="845" cy="120" r="4"/><text x="845" y="108" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">Japan</text>
-            <circle class="map-pin" cx="800" cy="360" r="4"/><text x="800" y="348" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">Australia</text>
-            <circle class="map-pin" cx="880" cy="390" r="4"/><text x="880" y="378" text-anchor="middle" fill="var(--ink-soft)" font-size="9" font-family="IBM Plex Mono, monospace">New Zealand</text>
+            <circle class="map-pin" cx="140" cy="70" r="4"/><text x="140" y="58" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">Canada</text>
+            <circle class="map-pin" cx="130" cy="160" r="4"/><text x="130" y="148" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">Mexico</text>
+            <circle class="map-pin" cx="180" cy="240" r="4"/><text x="180" y="228" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">Colombia</text>
+            <circle class="map-pin" cx="230" cy="310" r="4"/><text x="230" y="298" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">Brazil</text>
+            <circle class="map-pin" cx="360" cy="45" r="4"/><text x="360" y="33" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">Iceland</text>
+            <circle class="map-pin" cx="445" cy="75" r="4"/><text x="445" y="63" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">Ireland</text>
+            <circle class="map-pin" cx="465" cy="95" r="4"/><text x="465" y="83" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">France</text>
+            <circle class="map-pin" cx="450" cy="105" r="4"/><text x="450" y="117" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">Spain</text>
+            <circle class="map-pin" cx="485" cy="105" r="4"/><text x="485" y="117" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">Italy</text>
+            <circle class="map-pin" cx="475" cy="80" r="4"/><text x="475" y="68" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">Germany</text>
+            <circle class="map-pin" cx="470" cy="95" r="4"/><text x="470" y="83" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">Switzerland</text>
+            <circle class="map-pin" cx="500" cy="115" r="4"/><text x="500" y="127" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">Greece</text>
+            <circle class="map-pin" cx="530" cy="110" r="4"/><text x="530" y="98" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">Turkey</text>
+            <circle class="map-pin" cx="520" cy="155" r="4"/><text x="520" y="143" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">Egypt</text>
+            <circle class="map-pin" cx="680" cy="170" r="4"/><text x="680" y="158" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">India</text>
+            <circle class="map-pin" cx="760" cy="190" r="4"/><text x="760" y="178" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">Thailand</text>
+            <circle class="map-pin" cx="800" cy="200" r="4"/><text x="800" y="188" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">Philippines</text>
+            <circle class="map-pin" cx="760" cy="130" r="4"/><text x="760" y="118" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">China</text>
+            <circle class="map-pin" cx="820" cy="125" r="4"/><text x="820" y="113" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">S. Korea</text>
+            <circle class="map-pin" cx="845" cy="120" r="4"/><text x="845" y="108" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">Japan</text>
+            <circle class="map-pin" cx="800" cy="360" r="4"/><text x="800" y="348" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">Australia</text>
+            <circle class="map-pin" cx="880" cy="390" r="4"/><text x="880" y="378" text-anchor="middle" fill="#9a9ea6" font-size="9" font-family="IBM Plex Mono, monospace">New Zealand</text>
           </svg>
         </div>
       </div>
