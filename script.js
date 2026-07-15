@@ -303,22 +303,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------- PAGE TRANSITION OVERLAY ---------- */
-  let pageTransition = document.querySelector('.page-transition');
-  if (!pageTransition) {
-    pageTransition = document.createElement('div');
-    pageTransition.className = 'page-transition';
-    document.body.appendChild(pageTransition);
+  const pageTransition = document.querySelector('.page-transition');
+  if (pageTransition && pageTransition.parentNode) {
+    pageTransition.parentNode.removeChild(pageTransition);
   }
-  requestAnimationFrame(() => {
-    setTimeout(() => {
-      pageTransition.classList.add('fade-out');
-      setTimeout(() => {
-        if (pageTransition && pageTransition.parentNode) {
-          pageTransition.parentNode.removeChild(pageTransition);
-        }
-      }, 350);
-    }, 30);
-  });
 
   /* ---------- SMOOTH SCROLL FOR ANCHOR LINKS ---------- */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {

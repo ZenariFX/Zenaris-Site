@@ -129,16 +129,10 @@ body.page-amvs .arrow-down{color:#ffd60a;}
 /* ---------- HEADER ---------- */
 header{
   position:sticky;top:0;z-index:50;
-  background:rgba(14,15,17,0.95);
+  background:rgba(14,15,17,0.88);
+  backdrop-filter:blur(14px) saturate(1.2);
   border-bottom:1px solid var(--line);
   transition:background .3s ease, border-color .3s ease;
-  contain:paint;
-}
-@media (hover: hover) and (pointer: fine){
-  header{
-    background:rgba(14,15,17,0.88);
-    backdrop-filter:blur(14px) saturate(1.2);
-  }
 }
 header::before{
   content:'';
@@ -1060,20 +1054,14 @@ amvs-hero h2{
   left:0;
   right:0;
   z-index:50;
-  background:rgba(14,15,17,0.95);
+  background:rgba(14,15,17,0.88);
+  backdrop-filter:blur(14px) saturate(1.2);
   border-top:1px solid var(--line);
   padding:14px 24px;
   transition:background .3s ease, border-color .3s ease, opacity .5s ease, transform .5s ease;
   opacity:0;
   transform:translateY(20px);
   pointer-events:none;
-  contain:paint;
-}
-@media (hover: hover) and (pointer: fine){
-  .site-footer{
-    background:rgba(14,15,17,0.88);
-    backdrop-filter:blur(14px) saturate(1.2);
-  }
 }
 .site-footer.visible{
   opacity:1;
@@ -1414,14 +1402,7 @@ body.page-amvs .particle{background:#ffd60a;}
    ============================================================ */
 
 /* ---------- PAGE TRANSITION OVERLAY ---------- */
-.page-transition{
-  position:fixed;inset:0;
-  background:var(--bg);
-  z-index:9998;
-  opacity:1;
-  pointer-events:none;
-  transition:opacity .3s ease;
-}
+
 .page-transition.fade-out{
   opacity:0;
 }
