@@ -1817,14 +1817,6 @@ body.page-amvs .particle{background:#ffd60a;}
   border:1px solid var(--line);
   border-radius:var(--radius);
 }
-.country-list-title{
-  font-family:'VT323',monospace;
-  font-size:20px;
-  letter-spacing:0.05em;
-  color:var(--ink);
-  text-align:center;
-  margin-bottom:20px;
-}
 .country-columns{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -1835,7 +1827,7 @@ body.page-amvs .particle{background:#ffd60a;}
   font-size:11px;
   letter-spacing:0.1em;
   text-transform:uppercase;
-  color:var(--accent);
+  color:#00b4d8;
   margin-bottom:10px;
   margin-top:16px;
 }
