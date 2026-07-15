@@ -1526,7 +1526,33 @@ body.page-amvs .particle{background:#ffd60a;}
   .amvs-grid{padding:0 16px 40px;}
   .clips-grid-section{padding:0 16px 40px;}
   .clip-tile-text h4{font-size:20px;}
-  .map-pin{width:12px;height:12px;}
+  .world-map-wrapper{
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    gap:8px;
+    background:transparent;
+    border:none;
+    overflow:visible;
+    touch-action:none;
+  }
+  .world-map-container{
+    flex:1;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .map-zoom-controls{
+    position:static;
+    margin:0;
+    flex-shrink:0;
+  }
+  .map-zoom-btn{
+    width:28px;
+    height:28px;
+  }
+  .map-pin{width:9px;height:9px;}
 }
 
 /* CRITICAL FIX: Ensure content is always visible even if animations fail or reduced motion is enabled */
