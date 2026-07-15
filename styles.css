@@ -64,6 +64,7 @@ body::before{
   pointer-events:none;
   z-index:0;
   transition:background .6s ease;
+  will-change:transform;
 }
 body::after{
   content:'';
@@ -76,6 +77,11 @@ body::after{
   pointer-events:none;
   z-index:0;
   transition:background .6s ease;
+  will-change:transform;
+}
+@media (max-width:768px){
+  body::before{filter:blur(60px);opacity:0.08;width:300px;height:300px;}
+  body::after{filter:blur(50px);opacity:0.05;width:250px;height:250px;}
 }
 body.page-index::before{background:var(--accent);}
 body.page-index::after{background:var(--accent);}
@@ -123,10 +129,16 @@ body.page-amvs .arrow-down{color:#ffd60a;}
 /* ---------- HEADER ---------- */
 header{
   position:sticky;top:0;z-index:50;
-  background:rgba(14,15,17,0.88);
-  backdrop-filter:blur(14px) saturate(1.2);
+  background:rgba(14,15,17,0.95);
   border-bottom:1px solid var(--line);
   transition:background .3s ease, border-color .3s ease;
+  contain:paint;
+}
+@media (hover: hover) and (pointer: fine){
+  header{
+    background:rgba(14,15,17,0.88);
+    backdrop-filter:blur(14px) saturate(1.2);
+  }
 }
 header::before{
   content:'';
@@ -1048,14 +1060,20 @@ amvs-hero h2{
   left:0;
   right:0;
   z-index:50;
-  background:rgba(14,15,17,0.88);
-  backdrop-filter:blur(14px) saturate(1.2);
+  background:rgba(14,15,17,0.95);
   border-top:1px solid var(--line);
   padding:14px 24px;
   transition:background .3s ease, border-color .3s ease, opacity .5s ease, transform .5s ease;
   opacity:0;
   transform:translateY(20px);
   pointer-events:none;
+  contain:paint;
+}
+@media (hover: hover) and (pointer: fine){
+  .site-footer{
+    background:rgba(14,15,17,0.88);
+    backdrop-filter:blur(14px) saturate(1.2);
+  }
 }
 .site-footer.visible{
   opacity:1;

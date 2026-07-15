@@ -116,7 +116,8 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- FLOATING PARTICLES ---------- */
   const particlesContainer = document.querySelector('.particles-container');
   if (particlesContainer) {
-    const count = 35;
+    const isMobile = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768;
+    const count = isMobile ? 8 : 35;
     for (let i = 0; i < count; i++) {
       const p = document.createElement('div');
       p.className = 'particle';
