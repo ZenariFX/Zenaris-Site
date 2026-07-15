@@ -1747,21 +1747,19 @@ body.page-amvs .particle{background:#ffd60a;}
   background:var(--card);
   border:1px solid var(--line);
   border-radius:var(--radius);
-  overflow:hidden;
+  overflow:auto;
   position:relative;
   -webkit-overflow-scrolling:touch;
-  touch-action:none;
-  line-height:0;
 }
 .map-zoom-controls{
-  position:absolute;
+  position:sticky;
   top:12px;
-  right:12px;
+  float:right;
+  margin-right:12px;
   display:flex;
   flex-direction:column;
   gap:6px;
   z-index:10;
-  pointer-events:auto;
 }
 .map-zoom-btn{
   width:32px;
@@ -1788,15 +1786,12 @@ body.page-amvs .particle{background:#ffd60a;}
 [data-theme="light"] .map-zoom-btn{
   background:rgba(245,245,243,0.85);
 }
-[data-theme="light"] .map-pin::after{background:rgba(245,245,243,0.85);color:var(--ink);text-shadow:none;}
 .world-map-container{
   position:relative;
-  width:100%;
+  min-width:680px;
   transform-origin:center center;
   transition:transform .25s cubic-bezier(.22,1,.36,1);
   cursor:default;
-  display:block;
-  line-height:0;
 }
 .world-map-wrapper:has(.world-map-container[style*="scale"]) .world-map-container{
   cursor:grab;
@@ -1822,16 +1817,13 @@ body.page-amvs .particle{background:#ffd60a;}
   display:block;
   width:100%;
   height:auto;
-  max-height:70vh;
-  object-fit:contain;
-  object-position:center top;
   image-rendering:-webkit-optimize-contrast;
   image-rendering:crisp-edges;
 }
 .map-pin{
   position:absolute;
-  width:14px;
-  height:14px;
+  width:18px;
+  height:18px;
   color:#00b4d8;
   transform:translate(-50%,-100%);
   animation:pin-bounce 2s ease-in-out infinite;
@@ -1850,19 +1842,13 @@ body.page-amvs .particle{background:#ffd60a;}
   left:50%;
   transform:translateX(-50%);
   font-family:'IBM Plex Mono',monospace;
-  font-size:11px;
-  font-weight:600;
-  color:var(--ink);
-  text-shadow:0 1px 3px rgba(0,0,0,0.6);
+  font-size:9px;
+  color:var(--ink-soft);
   white-space:nowrap;
   opacity:0;
   transition:opacity .2s ease;
   pointer-events:none;
-  margin-bottom:4px;
-  padding:2px 6px;
-  background:rgba(14,15,17,0.7);
-  border-radius:4px;
-  backdrop-filter:blur(4px);
+  margin-bottom:2px;
 }
 .map-pin:hover::after{
   opacity:1;

@@ -344,7 +344,6 @@
   const btnIn = document.getElementById('map-zoom-in');
   const btnOut = document.getElementById('map-zoom-out');
   const btnReset = document.getElementById('map-zoom-reset');
-  const img = wrapper.querySelector('.world-map-img');
 
   let scale = 1;
   let panX = 0;
@@ -352,40 +351,8 @@
   let isDragging = false;
   let startX, startY;
 
-  function getDimensions(){
-    const wrapRect = wrapper.getBoundingClientRect();
-    const imgRect = img.getBoundingClientRect();
-    // Current displayed size of image at current scale
-    const displayedW = imgRect.width;
-    const displayedH = imgRect.height;
-    return {
-      wrapW: wrapRect.width,
-      wrapH: wrapRect.height,
-      imgW: displayedW,
-      imgH: displayedH
-    };
-  }
-
-  function clampPan(){
-    if(scale <= 1){
-      panX = 0;
-      panY = 0;
-      return;
-    }
-    const d = getDimensions();
-    // The scaled image is centered by default. 
-    // transform-origin is center, so at panX=0,panY=0 the image center aligns with container center.
-    // We need to clamp so the image edges don't go past the wrapper edges.
-    // Max pan = half the difference between scaled image and wrapper
-    const maxPanX = Math.max(0, (d.imgW - d.wrapW) / 2);
-    const maxPanY = Math.max(0, (d.imgH - d.wrapH) / 2);
-    panX = Math.max(-maxPanX, Math.min(maxPanX, panX));
-    panY = Math.max(-maxPanY, Math.min(maxPanY, panY));
-  }
-
   function updateTransform(){
-    clampPan();
-    container.style.transform = 'translate(' + panX.toFixed(2) + 'px,' + panY.toFixed(2) + 'px) scale(' + scale.toFixed(3) + ')';
+    container.style.transform = 'translate(' + panX + 'px,' + panY + 'px) scale(' + scale + ')';
   }
 
   btnIn.addEventListener('click', () => {
@@ -395,7 +362,7 @@
 
   btnOut.addEventListener('click', () => {
     scale = Math.max(scale / 1.4, 1);
-    if(scale <= 1){ panX = 0; panY = 0; }
+    if(scale === 1){ panX = 0; panY = 0; }
     updateTransform();
   });
 
@@ -407,13 +374,12 @@
   });
 
   // Pan when zoomed
-  container.addEventListener('mousedown', (e) => {
+  wrapper.addEventListener('mousedown', (e) => {
     if(scale > 1){
       isDragging = true;
       startX = e.clientX - panX;
       startY = e.clientY - panY;
       wrapper.style.cursor = 'grabbing';
-      e.preventDefault();
     }
   });
 
@@ -430,33 +396,33 @@
   });
 
   // Touch support
-  container.addEventListener('touchstart', (e) => {
+  wrapper.addEventListener('touchstart', (e) => {
     if(scale > 1 && e.touches.length === 1){
       isDragging = true;
       startX = e.touches[0].clientX - panX;
       startY = e.touches[0].clientY - panY;
     }
-  }, {passive:false});
+  }, {passive:true});
 
-  container.addEventListener('touchmove', (e) => {
+  wrapper.addEventListener('touchmove', (e) => {
     if(!isDragging || e.touches.length !== 1) return;
-    e.preventDefault();
     panX = e.touches[0].clientX - startX;
     panY = e.touches[0].clientY - startY;
     updateTransform();
-  }, {passive:false});
+  }, {passive:true});
 
-  container.addEventListener('touchend', () => {
+  wrapper.addEventListener('touchend', () => {
     isDragging = false;
   });
 
   // Double-tap to zoom
   let lastTap = 0;
-  container.addEventListener('touchend', (e) => {
+  wrapper.addEventListener('touchend', (e) => {
     const now = Date.now();
     if(now - lastTap < 300){
       if(scale === 1){
         scale = 2.5;
+        // Center zoom on tap location
         const rect = wrapper.getBoundingClientRect();
         const tapX = e.changedTouches[0].clientX - rect.left;
         const tapY = e.changedTouches[0].clientY - rect.top;
@@ -470,23 +436,6 @@
       updateTransform();
     }
     lastTap = now;
-  });
-
-  // Wheel zoom
-  wrapper.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    const delta = e.deltaY > 0 ? -0.2 : 0.2;
-    const newScale = Math.max(1, Math.min(4, scale + delta));
-    if(newScale !== scale){
-      scale = newScale;
-      if(scale <= 1){ panX = 0; panY = 0; }
-      updateTransform();
-    }
-  }, {passive:false});
-
-  // Recalculate on resize
-  window.addEventListener('resize', () => {
-    if(scale > 1) updateTransform();
   });
 })();
 </script>
