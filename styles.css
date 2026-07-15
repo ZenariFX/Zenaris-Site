@@ -1552,7 +1552,7 @@ body.page-amvs .particle{background:#ffd60a;}
     width:28px;
     height:28px;
   }
-  .map-pin{width:9px;height:9px;}
+  .map-pin{width:5px;height:5px;}
 }
 
 /* CRITICAL FIX: Ensure content is always visible even if animations fail or reduced motion is enabled */
