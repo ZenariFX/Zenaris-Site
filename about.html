@@ -181,7 +181,12 @@
   <section class="travel-section">
     <h3 class="section-title animate-fade-up d4"><span class="section-icon">&#9992;</span> Countries I'd Like to Visit</h3>
     <div class="world-map-wrapper animate-fade-up d5">
-      <div class="world-map-container">
+      <div class="map-zoom-controls">
+        <button class="map-zoom-btn" id="map-zoom-in" aria-label="Zoom in">+</button>
+        <button class="map-zoom-btn" id="map-zoom-out" aria-label="Zoom out">−</button>
+        <button class="map-zoom-btn" id="map-zoom-reset" aria-label="Reset zoom">⟲</button>
+      </div>
+      <div class="world-map-container" id="world-map-container">
         <img src="images/world-map.png" alt="World Map" class="world-map-img" loading="lazy">
         <!-- Country pins -->
         <div class="map-pin" style="left:17.0%;top:32.85%;" data-country="Canada">
@@ -331,5 +336,108 @@
 </footer>
 
 <script src="script.js"></script>
+
+<script>
+(function(){
+  const container = document.getElementById('world-map-container');
+  const wrapper = document.querySelector('.world-map-wrapper');
+  const btnIn = document.getElementById('map-zoom-in');
+  const btnOut = document.getElementById('map-zoom-out');
+  const btnReset = document.getElementById('map-zoom-reset');
+
+  let scale = 1;
+  let panX = 0;
+  let panY = 0;
+  let isDragging = false;
+  let startX, startY;
+
+  function updateTransform(){
+    container.style.transform = 'translate(' + panX + 'px,' + panY + 'px) scale(' + scale + ')';
+  }
+
+  btnIn.addEventListener('click', () => {
+    scale = Math.min(scale * 1.4, 4);
+    updateTransform();
+  });
+
+  btnOut.addEventListener('click', () => {
+    scale = Math.max(scale / 1.4, 1);
+    if(scale === 1){ panX = 0; panY = 0; }
+    updateTransform();
+  });
+
+  btnReset.addEventListener('click', () => {
+    scale = 1;
+    panX = 0;
+    panY = 0;
+    updateTransform();
+  });
+
+  // Pan when zoomed
+  wrapper.addEventListener('mousedown', (e) => {
+    if(scale > 1){
+      isDragging = true;
+      startX = e.clientX - panX;
+      startY = e.clientY - panY;
+      wrapper.style.cursor = 'grabbing';
+    }
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if(!isDragging) return;
+    panX = e.clientX - startX;
+    panY = e.clientY - startY;
+    updateTransform();
+  });
+
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+    wrapper.style.cursor = scale > 1 ? 'grab' : 'default';
+  });
+
+  // Touch support
+  wrapper.addEventListener('touchstart', (e) => {
+    if(scale > 1 && e.touches.length === 1){
+      isDragging = true;
+      startX = e.touches[0].clientX - panX;
+      startY = e.touches[0].clientY - panY;
+    }
+  }, {passive:true});
+
+  wrapper.addEventListener('touchmove', (e) => {
+    if(!isDragging || e.touches.length !== 1) return;
+    panX = e.touches[0].clientX - startX;
+    panY = e.touches[0].clientY - startY;
+    updateTransform();
+  }, {passive:true});
+
+  wrapper.addEventListener('touchend', () => {
+    isDragging = false;
+  });
+
+  // Double-tap to zoom
+  let lastTap = 0;
+  wrapper.addEventListener('touchend', (e) => {
+    const now = Date.now();
+    if(now - lastTap < 300){
+      if(scale === 1){
+        scale = 2.5;
+        // Center zoom on tap location
+        const rect = wrapper.getBoundingClientRect();
+        const tapX = e.changedTouches[0].clientX - rect.left;
+        const tapY = e.changedTouches[0].clientY - rect.top;
+        panX = (rect.width/2 - tapX) * (scale - 1);
+        panY = (rect.height/2 - tapY) * (scale - 1);
+      } else {
+        scale = 1;
+        panX = 0;
+        panY = 0;
+      }
+      updateTransform();
+    }
+    lastTap = now;
+  });
+})();
+</script>
 </body>
 </html>
