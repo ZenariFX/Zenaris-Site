@@ -1747,14 +1747,15 @@ body.page-amvs .particle{background:#ffd60a;}
   background:var(--card);
   border:1px solid var(--line);
   border-radius:var(--radius);
-  overflow:hidden;
+  overflow:auto;
   position:relative;
-  touch-action:none;
+  -webkit-overflow-scrolling:touch;
 }
 .map-zoom-controls{
-  position:absolute;
+  position:sticky;
   top:12px;
-  right:12px;
+  float:right;
+  margin-right:12px;
   display:flex;
   flex-direction:column;
   gap:6px;
