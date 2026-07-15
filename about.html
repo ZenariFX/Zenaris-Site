@@ -344,6 +344,7 @@
   const btnIn = document.getElementById('map-zoom-in');
   const btnOut = document.getElementById('map-zoom-out');
   const btnReset = document.getElementById('map-zoom-reset');
+  const img = wrapper.querySelector('.world-map-img');
 
   let scale = 1;
   let panX = 0;
@@ -351,7 +352,24 @@
   let isDragging = false;
   let startX, startY;
 
+  function clampPan(){
+    if(scale <= 1){
+      panX = 0;
+      panY = 0;
+      return;
+    }
+    const wrapW = wrapper.offsetWidth;
+    const wrapH = wrapper.offsetHeight;
+    const imgW = img.offsetWidth * scale;
+    const imgH = img.offsetHeight * scale;
+    const maxPanX = Math.max(0, (imgW - wrapW) / 2);
+    const maxPanY = Math.max(0, (imgH - wrapH) / 2);
+    panX = Math.max(-maxPanX, Math.min(maxPanX, panX));
+    panY = Math.max(-maxPanY, Math.min(maxPanY, panY));
+  }
+
   function updateTransform(){
+    clampPan();
     container.style.transform = 'translate(' + panX + 'px,' + panY + 'px) scale(' + scale + ')';
   }
 
@@ -362,7 +380,7 @@
 
   btnOut.addEventListener('click', () => {
     scale = Math.max(scale / 1.4, 1);
-    if(scale === 1){ panX = 0; panY = 0; }
+    if(scale <= 1){ panX = 0; panY = 0; }
     updateTransform();
   });
 
@@ -373,13 +391,14 @@
     updateTransform();
   });
 
-  // Pan when zoomed
-  wrapper.addEventListener('mousedown', (e) => {
+  // Pan when zoomed — only on the map container, not the wrapper
+  container.addEventListener('mousedown', (e) => {
     if(scale > 1){
       isDragging = true;
       startX = e.clientX - panX;
       startY = e.clientY - panY;
       wrapper.style.cursor = 'grabbing';
+      e.preventDefault();
     }
   });
 
@@ -395,34 +414,34 @@
     wrapper.style.cursor = scale > 1 ? 'grab' : 'default';
   });
 
-  // Touch support
-  wrapper.addEventListener('touchstart', (e) => {
+  // Touch support — prevent page scroll when touching the map
+  container.addEventListener('touchstart', (e) => {
     if(scale > 1 && e.touches.length === 1){
       isDragging = true;
       startX = e.touches[0].clientX - panX;
       startY = e.touches[0].clientY - panY;
     }
-  }, {passive:true});
+  }, {passive:false});
 
-  wrapper.addEventListener('touchmove', (e) => {
+  container.addEventListener('touchmove', (e) => {
     if(!isDragging || e.touches.length !== 1) return;
+    e.preventDefault();
     panX = e.touches[0].clientX - startX;
     panY = e.touches[0].clientY - startY;
     updateTransform();
-  }, {passive:true});
+  }, {passive:false});
 
-  wrapper.addEventListener('touchend', () => {
+  container.addEventListener('touchend', () => {
     isDragging = false;
   });
 
   // Double-tap to zoom
   let lastTap = 0;
-  wrapper.addEventListener('touchend', (e) => {
+  container.addEventListener('touchend', (e) => {
     const now = Date.now();
     if(now - lastTap < 300){
       if(scale === 1){
         scale = 2.5;
-        // Center zoom on tap location
         const rect = wrapper.getBoundingClientRect();
         const tapX = e.changedTouches[0].clientX - rect.left;
         const tapY = e.changedTouches[0].clientY - rect.top;
@@ -437,6 +456,18 @@
     }
     lastTap = now;
   });
+
+  // Wheel zoom support
+  wrapper.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? -0.2 : 0.2;
+    const newScale = Math.max(1, Math.min(4, scale + delta));
+    if(newScale !== scale){
+      scale = newScale;
+      if(scale <= 1){ panX = 0; panY = 0; }
+      updateTransform();
+    }
+  }, {passive:false});
 })();
 </script>
 </body>
