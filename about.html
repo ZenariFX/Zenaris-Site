@@ -352,25 +352,40 @@
   let isDragging = false;
   let startX, startY;
 
+  function getDimensions(){
+    const wrapRect = wrapper.getBoundingClientRect();
+    const imgRect = img.getBoundingClientRect();
+    // Current displayed size of image at current scale
+    const displayedW = imgRect.width;
+    const displayedH = imgRect.height;
+    return {
+      wrapW: wrapRect.width,
+      wrapH: wrapRect.height,
+      imgW: displayedW,
+      imgH: displayedH
+    };
+  }
+
   function clampPan(){
     if(scale <= 1){
       panX = 0;
       panY = 0;
       return;
     }
-    const wrapW = wrapper.offsetWidth;
-    const wrapH = wrapper.offsetHeight;
-    const imgW = img.offsetWidth * scale;
-    const imgH = img.offsetHeight * scale;
-    const maxPanX = Math.max(0, (imgW - wrapW) / 2);
-    const maxPanY = Math.max(0, (imgH - wrapH) / 2);
+    const d = getDimensions();
+    // The scaled image is centered by default. 
+    // transform-origin is center, so at panX=0,panY=0 the image center aligns with container center.
+    // We need to clamp so the image edges don't go past the wrapper edges.
+    // Max pan = half the difference between scaled image and wrapper
+    const maxPanX = Math.max(0, (d.imgW - d.wrapW) / 2);
+    const maxPanY = Math.max(0, (d.imgH - d.wrapH) / 2);
     panX = Math.max(-maxPanX, Math.min(maxPanX, panX));
     panY = Math.max(-maxPanY, Math.min(maxPanY, panY));
   }
 
   function updateTransform(){
     clampPan();
-    container.style.transform = 'translate(' + panX + 'px,' + panY + 'px) scale(' + scale + ')';
+    container.style.transform = 'translate(' + panX.toFixed(2) + 'px,' + panY.toFixed(2) + 'px) scale(' + scale.toFixed(3) + ')';
   }
 
   btnIn.addEventListener('click', () => {
@@ -391,7 +406,7 @@
     updateTransform();
   });
 
-  // Pan when zoomed — only on the map container, not the wrapper
+  // Pan when zoomed
   container.addEventListener('mousedown', (e) => {
     if(scale > 1){
       isDragging = true;
@@ -414,7 +429,7 @@
     wrapper.style.cursor = scale > 1 ? 'grab' : 'default';
   });
 
-  // Touch support — prevent page scroll when touching the map
+  // Touch support
   container.addEventListener('touchstart', (e) => {
     if(scale > 1 && e.touches.length === 1){
       isDragging = true;
@@ -457,7 +472,7 @@
     lastTap = now;
   });
 
-  // Wheel zoom support
+  // Wheel zoom
   wrapper.addEventListener('wheel', (e) => {
     e.preventDefault();
     const delta = e.deltaY > 0 ? -0.2 : 0.2;
@@ -468,6 +483,11 @@
       updateTransform();
     }
   }, {passive:false});
+
+  // Recalculate on resize
+  window.addEventListener('resize', () => {
+    if(scale > 1) updateTransform();
+  });
 })();
 </script>
 </body>
