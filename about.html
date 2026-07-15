@@ -351,7 +351,26 @@
   let isDragging = false;
   let startX, startY;
 
+  function getBounds(){
+    const rect = wrapper.getBoundingClientRect();
+    return { w: rect.width, h: rect.height };
+  }
+
+  function clampPan(){
+    if(scale <= 1){
+      panX = 0;
+      panY = 0;
+      return;
+    }
+    const b = getBounds();
+    const maxPanX = (b.w * (scale - 1)) / 2;
+    const maxPanY = (b.h * (scale - 1)) / 2;
+    panX = Math.max(-maxPanX, Math.min(maxPanX, panX));
+    panY = Math.max(-maxPanY, Math.min(maxPanY, panY));
+  }
+
   function updateTransform(){
+    clampPan();
     container.style.transform = 'translate(' + panX + 'px,' + panY + 'px) scale(' + scale + ')';
   }
 
@@ -362,7 +381,7 @@
 
   btnOut.addEventListener('click', () => {
     scale = Math.max(scale / 1.4, 1);
-    if(scale === 1){ panX = 0; panY = 0; }
+    if(scale <= 1){ panX = 0; panY = 0; }
     updateTransform();
   });
 
@@ -373,9 +392,10 @@
     updateTransform();
   });
 
-  // Pan when zoomed
+  // Pan when zoomed - mouse
   wrapper.addEventListener('mousedown', (e) => {
     if(scale > 1){
+      e.preventDefault();
       isDragging = true;
       startX = e.clientX - panX;
       startY = e.clientY - panY;
@@ -406,10 +426,12 @@
 
   wrapper.addEventListener('touchmove', (e) => {
     if(!isDragging || e.touches.length !== 1) return;
+    e.preventDefault();
+    e.stopPropagation();
     panX = e.touches[0].clientX - startX;
     panY = e.touches[0].clientY - startY;
     updateTransform();
-  }, {passive:true});
+  }, {passive:false});
 
   wrapper.addEventListener('touchend', () => {
     isDragging = false;
@@ -420,9 +442,9 @@
   wrapper.addEventListener('touchend', (e) => {
     const now = Date.now();
     if(now - lastTap < 300){
+      e.preventDefault();
       if(scale === 1){
         scale = 2.5;
-        // Center zoom on tap location
         const rect = wrapper.getBoundingClientRect();
         const tapX = e.changedTouches[0].clientX - rect.left;
         const tapY = e.changedTouches[0].clientY - rect.top;
@@ -436,6 +458,10 @@
       updateTransform();
     }
     lastTap = now;
+  }, {passive:false});
+
+  window.addEventListener('resize', () => {
+    if(scale > 1) updateTransform();
   });
 })();
 </script>
