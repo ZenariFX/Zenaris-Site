@@ -1829,9 +1829,7 @@ body.page-amvs .particle{background:#ffd60a;}
 
 
 
-@media (min-width:601px){
-  .map-pin-mobile{display:none;}
-}
+
 @media (max-width:600px){
   .world-map-wrapper{
     display:flex;
@@ -1866,9 +1864,9 @@ body.page-amvs .particle{background:#ffd60a;}
     width:36px;
     height:36px;
   }
-  .map-pin{width:7px;height:7px;}
+  .map-pin{width:10px;height:10px;}
   .map-pin{display:none;}
-  .map-pin-mobile{display:block;width:7px;height:7px;}
+  .map-pin-mobile{display:block;width:10px;height:10px;}
 }
 
 @keyframes pin-bounce{
@@ -2000,3 +1998,7 @@ body.page-amvs .particle{background:#ffd60a;}
   .amvs-grid{padding:0 16px 40px;}
   .clips-grid-section{padding:0 16px 40px;}
   .clip-tile-text h4{font-size:20px;}}
+
+@media (min-width:601px){
+  .map-pin-mobile{display:none;}
+}
