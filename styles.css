@@ -1828,7 +1828,7 @@ body.page-amvs .particle{background:#ffd60a;}
     width:36px;
     height:36px;
   }
-  .map-pin{width:5px;height:5px;}
+  .map-pin{width:7px;height:7px;}
 }
 
 @keyframes pin-bounce{
