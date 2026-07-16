@@ -1716,7 +1716,7 @@ body.page-amvs .particle{background:#ffd60a;}
   width:32px;
   height:32px;
   border-radius:8px;
-  background:rgba(14,15,17,0.85);
+  background:var(--card);
   border:1px solid var(--line);
   color:var(--ink-soft);
   font-family:'IBM Plex Mono',monospace;
@@ -1727,16 +1727,12 @@ body.page-amvs .particle{background:#ffd60a;}
   align-items:center;
   justify-content:center;
   transition:color .15s ease, border-color .15s ease, background .15s ease;
-  -webkit-backdrop-filter:blur(8px);
-  backdrop-filter:blur(8px);
 }
 .map-zoom-btn:hover{
   color:var(--accent);
   border-color:var(--ink-soft);
 }
-[data-theme="light"] .map-zoom-btn{
-  background:rgba(245,245,243,0.85);
-}
+
 .world-map-container{
   position:relative;
   width:100%;
@@ -1765,11 +1761,12 @@ body.page-amvs .particle{background:#ffd60a;}
   color:#00b4d8;
   transform:translate(-50%,-100%);
   animation:pin-bounce 2s ease-in-out infinite;
-  cursor:pointer;
+  cursor:default;
   z-index:2;
   will-change:transform;
   backface-visibility:hidden;
   -webkit-backface-visibility:hidden;
+  pointer-events:none;
 }
 .map-pin svg{
   width:100%;
@@ -1783,11 +1780,12 @@ body.page-amvs .particle{background:#ffd60a;}
   color:#00b4d8;
   transform:translate(-50%,-100%);
   animation:pin-bounce 2s ease-in-out infinite;
-  cursor:pointer;
+  cursor:default;
   z-index:2;
   will-change:transform;
   backface-visibility:hidden;
   -webkit-backface-visibility:hidden;
+  pointer-events:none;
 }
 .map-pin-mobile svg{
   width:100%;
@@ -1837,7 +1835,7 @@ body.page-amvs .particle{background:#ffd60a;}
   }
   .map-pin{width:14px;height:14px;}
   .map-pin{display:none;}
-  .map-pin-mobile{display:block;width:5px;height:5px;filter:drop-shadow(0 0 1px rgba(0,180,216,0.5));will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
+  .map-pin-mobile{display:block;width:5px;height:5px;filter:drop-shadow(0 0 1px rgba(0,180,216,0.5));will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;pointer-events:none;}
 }
 
 @keyframes pin-bounce{
