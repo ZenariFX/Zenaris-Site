@@ -1767,6 +1767,9 @@ body.page-amvs .particle{background:#ffd60a;}
   animation:pin-bounce 2s ease-in-out infinite;
   cursor:pointer;
   z-index:2;
+  will-change:transform;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
 }
 .map-pin svg{
   width:100%;
@@ -1800,6 +1803,9 @@ body.page-amvs .particle{background:#ffd60a;}
   animation:pin-bounce 2s ease-in-out infinite;
   cursor:pointer;
   z-index:2;
+  will-change:transform;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
 }
 .map-pin-mobile svg{
   width:100%;
@@ -1867,7 +1873,7 @@ body.page-amvs .particle{background:#ffd60a;}
   }
   .map-pin{width:14px;height:14px;}
   .map-pin{display:none;}
-  .map-pin-mobile{display:block;width:14px;height:14px;filter:drop-shadow(0 0 3px rgba(0,180,216,0.8));}
+  .map-pin-mobile{display:block;width:5px;height:5px;filter:drop-shadow(0 0 1px rgba(0,180,216,0.5));will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
 }
 
 @keyframes pin-bounce{

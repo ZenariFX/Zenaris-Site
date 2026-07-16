@@ -440,7 +440,7 @@
 
   function updateTransform(){
     clampPan();
-    container.style.transform = 'translate(' + panX + 'px,' + panY + 'px) scale(' + scale + ')';
+    container.style.transform = 'translate3d(' + panX + 'px,' + panY + 'px,0) scale(' + scale + ')';
   }
 
   btnIn.addEventListener('click', () => {
