@@ -1864,9 +1864,9 @@ body.page-amvs .particle{background:#ffd60a;}
     width:36px;
     height:36px;
   }
-  .map-pin{width:10px;height:10px;}
+  .map-pin{width:14px;height:14px;}
   .map-pin{display:none;}
-  .map-pin-mobile{display:block;width:10px;height:10px;}
+  .map-pin-mobile{display:block;width:14px;height:14px;filter:drop-shadow(0 0 3px rgba(0,180,216,0.8));}
 }
 
 @keyframes pin-bounce{
