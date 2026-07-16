@@ -1504,29 +1504,8 @@ body.page-amvs .particle{background:#ffd60a;}
   .gallery{grid-template-columns:repeat(2,1fr);}
   .anime-dropdown-menu{grid-template-columns:repeat(2,1fr);min-width:220px;}
 }
-@media (max-width:600px){
-  .gallery{grid-template-columns:repeat(2,1fr);gap:14px;}
-  section{padding:52px 0;}
-  .hero{padding:48px 0 40px;}
-  .dropdown{gap:22px;flex-direction:column;text-align:center;}
-  .footer-inner{gap:16px;}
-  .footer-brand{font-size:16px;}
-  .stats-row{flex-direction:row !important;}
-  .stat-divider{display:block !important;}
-  .hero-actions{flex-wrap:nowrap !important;}
-  .stat-item{padding:20px 12px;}
-  .stat-value{font-size:36px;}
-  .embed-section{padding:0 16px 40px;}
-  .clips-list{padding:0 16px 40px;}
-  .clip-row{padding:20px 16px;}
-  .clip-row-content h3{font-size:16px;}
-  .clips-coming-soon{padding:0 16px 40px;}
-  .discord-embed{margin:24px 16px 0;}
-  .socials-list{padding:0 16px 40px;}
-  .amvs-grid{padding:0 16px 40px;}
-  .clips-grid-section{padding:0 16px 40px;}
-  .clip-tile-text h4{font-size:20px;}
-   ABOUT PAGE ENHANCEMENTS
+
+/* ABOUT PAGE ENHANCEMENTS
    ============================================================ */
 
 /* Profile Section */
@@ -1851,6 +1830,29 @@ body.page-amvs .particle{background:#ffd60a;}
   }
   .map-pin{width:5px;height:5px;}
 }
+
+@media (max-width:600px){
+  .gallery{grid-template-columns:repeat(2,1fr);gap:14px;}
+  section{padding:52px 0;}
+  .hero{padding:48px 0 40px;}
+  .dropdown{gap:22px;flex-direction:column;text-align:center;}
+  .footer-inner{gap:16px;}
+  .footer-brand{font-size:16px;}
+  .stats-row{flex-direction:row !important;}
+  .stat-divider{display:block !important;}
+  .hero-actions{flex-wrap:nowrap !important;}
+  .stat-item{padding:20px 12px;}
+  .stat-value{font-size:36px;}
+  .embed-section{padding:0 16px 40px;}
+  .clips-list{padding:0 16px 40px;}
+  .clip-row{padding:20px 16px;}
+  .clip-row-content h3{font-size:16px;}
+  .clips-coming-soon{padding:0 16px 40px;}
+  .discord-embed{margin:24px 16px 0;}
+  .socials-list{padding:0 16px 40px;}
+  .amvs-grid{padding:0 16px 40px;}
+  .clips-grid-section{padding:0 16px 40px;}
+  .clip-tile-text h4{font-size:20px;}
 
 @keyframes pin-bounce{
   0%,100%{transform:translate(-50%,-100%) translateY(0);}
