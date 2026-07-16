@@ -1776,24 +1776,6 @@ body.page-amvs .particle{background:#ffd60a;}
   height:100%;
   filter:drop-shadow(0 2px 4px rgba(0,180,216,0.4));
 }
-.map-pin::after{
-  content:attr(data-country);
-  position:absolute;
-  bottom:100%;
-  left:50%;
-  transform:translateX(-50%);
-  font-family:'IBM Plex Mono',monospace;
-  font-size:9px;
-  color:var(--ink-soft);
-  white-space:nowrap;
-  opacity:0;
-  transition:opacity .2s ease;
-  pointer-events:none;
-  margin-bottom:2px;
-}
-.map-pin:hover::after{
-  opacity:1;
-}
 .map-pin-mobile{
   position:absolute;
   width:18px;
@@ -1811,24 +1793,6 @@ body.page-amvs .particle{background:#ffd60a;}
   width:100%;
   height:100%;
   filter:drop-shadow(0 2px 4px rgba(0,180,216,0.4));
-}
-.map-pin-mobile::after{
-  content:attr(data-country);
-  position:absolute;
-  bottom:100%;
-  left:50%;
-  transform:translateX(-50%);
-  font-family:'IBM Plex Mono',monospace;
-  font-size:9px;
-  color:var(--ink-soft);
-  white-space:nowrap;
-  opacity:0;
-  transition:opacity .2s ease;
-  pointer-events:none;
-  margin-bottom:2px;
-}
-.map-pin-mobile:hover::after{
-  opacity:1;
 }
 
 
