@@ -1828,16 +1828,18 @@ body.page-amvs .particle{background:#ffd60a;}
   }
   .world-map-container{
     width:100%;
-    min-height:260px;
+    order:1;
     background:var(--card);
     border:1px solid var(--line);
     border-radius:var(--radius);
     overflow:hidden;
+    transform-origin:center center;
   }
   .map-zoom-controls{
     position:static;
     margin:0;
     flex-shrink:0;
+    order:2;
     flex-direction:row;
     justify-content:center;
     gap:10px;
