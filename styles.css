@@ -1823,7 +1823,7 @@ body.page-amvs .particle{background:#ffd60a;}
     gap:12px;
     background:transparent;
     border:none;
-    overflow:visible;
+    overflow:hidden;
     touch-action:none;
   }
   .world-map-container{
@@ -1834,6 +1834,7 @@ body.page-amvs .particle{background:#ffd60a;}
     border-radius:var(--radius);
     overflow:hidden;
     transform-origin:center center;
+    position:relative;
   }
   .map-zoom-controls{
     position:static;
