@@ -1771,7 +1771,7 @@ body.page-amvs .particle{background:#ffd60a;}
 .map-pin svg{
   width:100%;
   height:100%;
-  filter:drop-shadow(0 2px 4px rgba(0,180,216,0.4));
+  filter:drop-shadow(0 2px 4px rgba(0,180,216,0.4)) drop-shadow(0 0 3px rgba(0,180,216,0.6));
 }
 .map-pin-mobile{
   position:absolute;
