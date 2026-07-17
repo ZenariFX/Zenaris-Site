@@ -1862,7 +1862,7 @@ body.page-amvs .particle{background:#ffd60a;}
     gap:12px;
     background:transparent;
     border:none;
-    overflow:hidden;
+    overflow:visible;
     touch-action:none;
   }
   .world-map-container{
