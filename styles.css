@@ -1746,6 +1746,13 @@ body.page-amvs .particle{background:#ffd60a;}
   box-shadow:0 0 12px rgba(0,180,216,.6),0 0 24px rgba(0,180,216,.3),inset 0 0 8px rgba(0,180,216,.2);
   transform:scale(.92);
 }
+.map-zoom-btn:active{
+  color:#00b4d8;
+  border-color:#00b4d8;
+  background:rgba(0,180,216,.2);
+  box-shadow:0 0 12px rgba(0,180,216,.6),0 0 24px rgba(0,180,216,.3),inset 0 0 8px rgba(0,180,216,.2);
+  transform:scale(.92);
+}
 
 .world-map-container{
   position:relative;
@@ -2045,6 +2052,14 @@ body.page-amvs .particle{background:#ffd60a;}
 
 @media (min-width:601px){
   .map-pin-mobile{display:none;visibility:hidden;pointer-events:none;}
+}
+
+@media (max-width:768px){
+  .map-pin::after{
+    font-size:8px;
+    padding:1px 4px;
+    bottom:calc(100% + 2px);
+  }
 }
 
 @media (max-width:768px){
