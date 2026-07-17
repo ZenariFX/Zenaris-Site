@@ -1872,7 +1872,7 @@ body.page-amvs .particle{background:#ffd60a;}
     background:var(--card);
     border:1px solid var(--line);
     border-radius:var(--radius);
-    overflow:hidden;
+    overflow:visible;
     transform-origin:center center;
     position:relative;
   }
