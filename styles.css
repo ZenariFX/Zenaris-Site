@@ -1920,7 +1920,7 @@ body.page-amvs .particle{background:#ffd60a;}
   .map-pin-mobile::after{
     content:attr(data-country);
     position:absolute;
-    bottom:calc(100% + 1px);
+    bottom:100%;
     left:50%;
     transform:translateX(-50%);
     background:var(--card);
