@@ -506,28 +506,7 @@
     isDragging = false;
   });
 
-  // Double-tap to zoom
-  let lastTap = 0;
-  wrapper.addEventListener('touchend', (e) => {
-    const now = Date.now();
-    if(now - lastTap < 300){
-      e.preventDefault();
-      if(scale === 1){
-        scale = 2.5;
-        const rect = wrapper.getBoundingClientRect();
-        const tapX = e.changedTouches[0].clientX - rect.left;
-        const tapY = e.changedTouches[0].clientY - rect.top;
-        panX = (rect.width/2 - tapX) * (scale - 1);
-        panY = (rect.height/2 - tapY) * (scale - 1);
-      } else {
-        scale = 1;
-        panX = 0;
-        panY = 0;
-      }
-      updateTransform();
-    }
-    lastTap = now;
-  }, {passive:false});
+  // Double-tap zoom disabled — use buttons only
 
   window.addEventListener('resize', () => {
     if(scale > 1) updateTransform();
