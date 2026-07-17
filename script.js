@@ -338,3 +338,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 1500);
 
 });
+
+/* ---------- MAP PIN TAP TO SHOW LABEL (MOBILE) ---------- */
+(function(){
+  const pins = document.querySelectorAll('.map-pin-mobile');
+  pins.forEach(pin => {
+    pin.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // Remove active from all other pins
+      pins.forEach(p => { if(p !== pin) p.classList.remove('active'); });
+      // Toggle active on clicked pin
+      pin.classList.toggle('active');
+    });
+  });
+  // Click anywhere else to close all labels
+  document.addEventListener('click', () => {
+    pins.forEach(p => p.classList.remove('active'));
+  });
+})();
