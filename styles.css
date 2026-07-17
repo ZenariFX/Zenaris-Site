@@ -1726,7 +1726,7 @@ body.page-amvs .particle{background:#ffd60a;}
   display:flex;
   align-items:center;
   justify-content:center;
-  transition:color .15s ease, border-color .15s ease, background .15s ease;
+  transition:color .15s ease, border-color .15s ease, background .15s ease, box-shadow .15s ease, transform .1s ease;
   -webkit-tap-highlight-color:transparent;
   -webkit-touch-callout:none;
   user-select:none;
@@ -1738,6 +1738,13 @@ body.page-amvs .particle{background:#ffd60a;}
 .map-zoom-btn:hover{
   color:var(--accent);
   border-color:var(--ink-soft);
+}
+.map-zoom-btn:active{
+  color:#00b4d8;
+  border-color:#00b4d8;
+  background:rgba(0,180,216,.15);
+  box-shadow:0 0 8px rgba(0,180,216,.5),0 0 16px rgba(0,180,216,.25),inset 0 0 6px rgba(0,180,216,.15);
+  transform:scale(.92);
 }
 
 .world-map-container{
@@ -2039,3 +2046,18 @@ body.page-amvs .particle{background:#ffd60a;}
 @media (min-width:601px){
   .map-pin-mobile{display:none;visibility:hidden;pointer-events:none;}
 }
+
+@media (max-width:768px){
+  .map-pin[data-country="New Zealand"]{left:87.0%!important}
+  .map-pin[data-country="India"]{left:68.0%!important}
+  .map-pin[data-country="South Korea"]{top:34.77%!important}
+  .map-pin[data-country="Japan"]{top:33.46%!important}
+  .map-pin[data-country="Turkey"]{top:36.08%!important}
+  .map-pin[data-country="Italy"]{top:38.46%!important}
+  .map-pin[data-country="Germany"]{left:49.5%!important}
+  .map-pin[data-country="France"]{left:49.5%!important}
+  .map-pin[data-country="Spain"]{left:48.5%!important}
+  .map-pin[data-country="Ireland"]{left:48.5%!important}
+  .map-pin[data-country="Thailand"]{top:46.62%!important}
+}
+
