@@ -236,6 +236,13 @@ body.page-amvs .dropdown a[aria-current="page"]{color:#ffd60a;}
   opacity:0;
   animation:fadeUp .7s cubic-bezier(.22,1,.36,1) forwards;
 }
+.no-animate-fallback .animate-fade-up,
+.no-animate-fallback .animate-fade-in,
+.no-animate-fallback .animate-scale-in{
+  opacity:1!important;
+  transform:none!important;
+  animation:none!important;
+}
 .animate-fade-in{
   opacity:0;
   animation:fadeIn .6s ease forwards;
@@ -1746,13 +1753,6 @@ body.page-amvs .particle{background:#ffd60a;}
   box-shadow:0 0 12px rgba(0,180,216,.6),0 0 24px rgba(0,180,216,.3),inset 0 0 8px rgba(0,180,216,.2);
   transform:scale(.92);
 }
-.map-zoom-btn:active{
-  color:#00b4d8;
-  border-color:#00b4d8;
-  background:rgba(0,180,216,.2);
-  box-shadow:0 0 12px rgba(0,180,216,.6),0 0 24px rgba(0,180,216,.3),inset 0 0 8px rgba(0,180,216,.2);
-  transform:scale(.92);
-}
 
 .world-map-container{
   position:relative;
@@ -1792,23 +1792,23 @@ body.page-amvs .particle{background:#ffd60a;}
 .map-pin::after{
   content:attr(data-country);
   position:absolute;
-  bottom:calc(100% + 6px);
+  bottom:calc(100% + 3px);
   left:50%;
   transform:translateX(-50%);
   background:var(--card);
   color:#00b4d8;
   font-family:'IBM Plex Mono',monospace;
-  font-size:11px;
+  font-size:9px;
   font-weight:600;
-  padding:4px 10px;
-  border-radius:6px;
+  padding:2px 6px;
+  border-radius:4px;
   white-space:nowrap;
   opacity:0;
   pointer-events:none;
   transition:opacity .2s ease;
   text-shadow:0 0 6px rgba(0,180,216,0.8),0 0 12px rgba(0,180,216,0.4);
   box-shadow:0 2px 8px rgba(0,0,0,0.3);
-  z-index:10;
+  z-index:100;
 }
 .map-pin:hover::after{
   opacity:1;
@@ -2055,17 +2055,6 @@ body.page-amvs .particle{background:#ffd60a;}
 }
 
 @media (max-width:768px){
-  .map-pin[data-country="New Zealand"]{left:96%!important}
-  .map-pin[data-country="India"]{left:76%!important}
-  .map-pin[data-country="S. Korea"]{top:40.5%!important}
-  .map-pin[data-country="Japan"]{top:41.54%!important}
-  .map-pin[data-country="Turkey"]{top:39.5%!important}
-  .map-pin[data-country="Italy"]{top:37.5%!important}
-  .map-pin[data-country="Germany"]{left:51%!important}
-  .map-pin[data-country="France"]{left:51%!important}
-  .map-pin[data-country="Spain"]{left:48.5%!important}
-  .map-pin[data-country="Ireland"]{left:48.5%!important}
-  .map-pin[data-country="Thailand"]{top:52%!important}
   .map-pin::after{
     font-size:8px;
     padding:1px 4px;
