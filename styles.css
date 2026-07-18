@@ -1871,7 +1871,7 @@ body.page-amvs .particle{background:#ffd60a;}
     order:1;
     background:var(--card);
     border:1px solid var(--line);
-    border-radius:var(--radius);
+    border-radius:6px;
     overflow:visible;
     transform-origin:center center;
     position:relative;
