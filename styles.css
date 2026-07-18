@@ -1789,6 +1789,9 @@ body.page-amvs .particle{background:#ffd60a;}
   -webkit-backface-visibility:hidden;
   -webkit-tap-highlight-color:transparent;
 }
+.map-pin:hover{
+  z-index:50;
+}
 .map-pin::after{
   content:attr(data-country);
   position:absolute;
