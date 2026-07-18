@@ -96,23 +96,27 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ---------- TYPING EFFECT ---------- */
-  document.querySelectorAll('.typewriter').forEach(el => {
-    const text = el.getAttribute('data-text') || '';
-    // Skip if text is already present (bfcache restore)
-    if(el.textContent.includes(text)) return;
-    el.textContent = '';
-    const cursor = document.createElement('span');
-    cursor.className = 'typewriter-cursor';
-    el.appendChild(cursor);
-    let i = 0;
-    const type = () => {
-      if (i < text.length) {
-        el.insertBefore(document.createTextNode(text.charAt(i)), cursor);
-        i++;
-        setTimeout(type, 45);
-      }
-    };
-    setTimeout(type, 400);
+  function runTypewriter(){
+    document.querySelectorAll('.typewriter').forEach(el => {
+      const text = el.getAttribute('data-text') || '';
+      el.textContent = '';
+      const cursor = document.createElement('span');
+      cursor.className = 'typewriter-cursor';
+      el.appendChild(cursor);
+      let i = 0;
+      const type = () => {
+        if (i < text.length) {
+          el.insertBefore(document.createTextNode(text.charAt(i)), cursor);
+          i++;
+          setTimeout(type, 45);
+        }
+      };
+      setTimeout(type, 400);
+    });
+  }
+  runTypewriter();
+  window.addEventListener('pageshow', (e) => {
+    if(e.persisted) runTypewriter();
   });
 
   /* ---------- FLOATING PARTICLES ---------- */
