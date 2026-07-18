@@ -98,6 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- TYPING EFFECT ---------- */
   document.querySelectorAll('.typewriter').forEach(el => {
     const text = el.getAttribute('data-text') || '';
+    // Skip if text is already present (bfcache restore)
+    if(el.textContent.includes(text)) return;
     el.textContent = '';
     const cursor = document.createElement('span');
     cursor.className = 'typewriter-cursor';
