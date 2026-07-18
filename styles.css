@@ -1894,11 +1894,11 @@ body.page-amvs .particle{background:#ffd60a;}
   }
   .map-pin{width:14px;height:14px;}
   .map-pin{display:none;visibility:hidden;pointer-events:none;}
-  .map-pin-mobile{display:block;width:5px;height:5px;filter:drop-shadow(0 0 1px rgba(0,180,216,0.5));will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;z-index:1;}
+  .map-pin-mobile{display:block;width:12px;height:12px;filter:drop-shadow(0 0 1px rgba(0,180,216,0.5));will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;z-index:1;}
   .map-pin-mobile .pin-label{
     display:block;
     position:relative;
-    margin-top:-22px;
+    margin-top:-14px;
     margin-left:50%;
     transform:translateX(-50%);
     background:var(--card);
