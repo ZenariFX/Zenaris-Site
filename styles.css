@@ -1840,7 +1840,6 @@ body.page-amvs .particle{background:#ffd60a;}
   backface-visibility:hidden;
   -webkit-backface-visibility:hidden;
   -webkit-tap-highlight-color:transparent;
-  overflow:hidden;
 }
 
 .map-pin-mobile svg{
@@ -1896,7 +1895,7 @@ body.page-amvs .particle{background:#ffd60a;}
   }
   .map-pin{width:14px;height:14px;}
   .map-pin{display:none;visibility:hidden;pointer-events:none;}
-  .map-pin-mobile{display:block;width:4px;height:4px;overflow:hidden;filter:drop-shadow(0 0 1px rgba(0,180,216,0.5));will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;z-index:1;}
+  .map-pin-mobile{display:block;width:4px;height:4px;filter:drop-shadow(0 0 1px rgba(0,180,216,0.5));will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden;z-index:1;}
   .map-pin-mobile .pin-label{
     display:block;
     position:relative;
