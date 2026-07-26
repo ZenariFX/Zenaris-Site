@@ -182,10 +182,10 @@
   <section class="travel-section">
     <h3 class="section-title animate-fade-up d4"><span class="section-icon">&#9992;</span> Countries I'd Like to Visit</h3>
     <div class="world-map-wrapper animate-fade-up d5">
-      <div class="map-zoom-controls">
-        <button class="map-zoom-btn" id="map-zoom-in" aria-label="Zoom in">+</button>
-        <button class="map-zoom-btn" id="map-zoom-out" aria-label="Zoom out">−</button>
-        <button class="map-zoom-btn" id="map-zoom-reset" aria-label="Reset zoom">⟲</button>
+      <div class="map-zoom-controls map-zoom-controls-desktop">
+        <button class="map-zoom-btn" id="map-zoom-in-desktop" aria-label="Zoom in">+</button>
+        <button class="map-zoom-btn" id="map-zoom-out-desktop" aria-label="Zoom out">−</button>
+        <button class="map-zoom-btn" id="map-zoom-reset-desktop" aria-label="Reset zoom">⟲</button>
       </div>
       <div class="world-map-container" id="world-map-container">
         <img src="images/world-map.webp" alt="World Map" class="world-map-img" loading="lazy">
@@ -389,6 +389,11 @@
         </div>
         </div>
       </div>
+      <div class="map-zoom-controls map-zoom-controls-mobile">
+        <button class="map-zoom-btn" id="map-zoom-in-mobile" aria-label="Zoom in">+</button>
+        <button class="map-zoom-btn" id="map-zoom-out-mobile" aria-label="Zoom out">−</button>
+        <button class="map-zoom-btn" id="map-zoom-reset-mobile" aria-label="Reset zoom">⟲</button>
+      </div>
     <div class="country-list animate-fade-up d6">
       <div class="country-columns">
         <div class="country-col">
@@ -482,9 +487,12 @@
 (function(){
   const container = document.getElementById('world-map-container');
   const wrapper = document.querySelector('.world-map-wrapper');
-  const btnIn = document.getElementById('map-zoom-in');
-  const btnOut = document.getElementById('map-zoom-out');
-  const btnReset = document.getElementById('map-zoom-reset');
+  const btnInDesktop = document.getElementById('map-zoom-in-desktop');
+  const btnOutDesktop = document.getElementById('map-zoom-out-desktop');
+  const btnResetDesktop = document.getElementById('map-zoom-reset-desktop');
+  const btnInMobile = document.getElementById('map-zoom-in-mobile');
+  const btnOutMobile = document.getElementById('map-zoom-out-mobile');
+  const btnResetMobile = document.getElementById('map-zoom-reset-mobile');
 
   let scale = 1;
   let panX = 0;
@@ -515,23 +523,16 @@
     container.style.transform = 'translate3d(' + panX + 'px,' + panY + 'px,0) scale(' + scale + ')';
   }
 
-  btnIn.addEventListener('click', () => {
-    scale = Math.min(scale * 1.4, 4);
-    updateTransform();
-  });
+  function zoomIn(){ scale = Math.min(scale * 1.4, 4); updateTransform(); }
+  function zoomOut(){ scale = Math.max(scale / 1.4, 1); if(scale <= 1){ panX = 0; panY = 0; } updateTransform(); }
+  function zoomReset(){ scale = 1; panX = 0; panY = 0; updateTransform(); }
 
-  btnOut.addEventListener('click', () => {
-    scale = Math.max(scale / 1.4, 1);
-    if(scale <= 1){ panX = 0; panY = 0; }
-    updateTransform();
-  });
-
-  btnReset.addEventListener('click', () => {
-    scale = 1;
-    panX = 0;
-    panY = 0;
-    updateTransform();
-  });
+  btnInDesktop.addEventListener('click', zoomIn);
+  btnOutDesktop.addEventListener('click', zoomOut);
+  btnResetDesktop.addEventListener('click', zoomReset);
+  btnInMobile.addEventListener('click', zoomIn);
+  btnOutMobile.addEventListener('click', zoomOut);
+  btnResetMobile.addEventListener('click', zoomReset);
 
   // Pan when zoomed - mouse
   wrapper.addEventListener('mousedown', (e) => {
