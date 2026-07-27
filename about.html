@@ -562,7 +562,7 @@
   const wrapper = document.querySelector('.world-map-wrapper');
   const label = document.getElementById('map-mobile-active-label');
   const pins = document.querySelectorAll('.map-pin-mobile');
-  if(!label || !pins.length) return;
+  if(!label || !pins.length || !wrapper) return;
 
   function positionLabel(){
     const active = document.querySelector('.map-pin-mobile.active');
@@ -574,22 +574,22 @@
   }
 
   pins.forEach(pin => {
-    pin.addEventListener('click', (e) => {
+    pin.addEventListener('click', function(e){
       e.stopPropagation();
-      const wasActive = pin.classList.contains('active');
+      const wasActive = this.classList.contains('active');
       pins.forEach(p => p.classList.remove('active'));
       if(wasActive){
         label.classList.remove('active');
         return;
       }
-      pin.classList.add('active');
-      label.textContent = pin.dataset.country;
+      this.classList.add('active');
+      label.textContent = this.dataset.country;
       label.classList.add('active');
-      positionLabel();
+      requestAnimationFrame(positionLabel);
     });
   });
 
-  document.addEventListener('click', (e) => {
+  document.addEventListener('click', function(e){
     if(!e.target.closest('.map-pin-mobile')){
       pins.forEach(p => p.classList.remove('active'));
       label.classList.remove('active');
@@ -597,15 +597,15 @@
   });
 
   if(container){
-    new MutationObserver(() => {
+    new MutationObserver(function(){
       if(label.classList.contains('active')) positionLabel();
     }).observe(container, { attributes: true, attributeFilter: ['style'] });
   }
 
-  window.addEventListener('resize', () => {
+  window.addEventListener('resize', function(){
     if(label.classList.contains('active')) positionLabel();
   });
-  window.addEventListener('scroll', () => {
+  window.addEventListener('scroll', function(){
     if(label.classList.contains('active')) positionLabel();
   }, { passive: true });
 })();
