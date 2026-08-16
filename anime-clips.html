@@ -1,2 +1,505 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Anime Clips - Zenari's Page</title><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Satisfy&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=VT323&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"><meta name="theme-color" content="#c77dff"><meta property="og:site_name" content="ZenariFX"><meta property="og:title" content="Anime Clips — Zenari's Page"><meta property="og:description" content="Browse the Full Collection of Pre-Cut Anime Clips!"><meta property="og:image" content="https://zenarifx.github.io/Zenaris-Site/images/og-clips.webp"><meta property="og:url" content="https://zenarifx.github.io/Zenaris-Site/anime-clips.html"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Anime Clips — Zenari's Page"><meta name="twitter:description" content="Browse the Full Collection of Pre-Cut Anime Clips. Raw & Time Remapped."><meta name="twitter:image" content="https://zenarifx.github.io/Zenaris-Site/images/og-clips.webp"></head><body class="page-clips"><div class="particles-container"></div><header><nav><button class="menu-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button><a class="brand" href="index.html">Zenari's Page</a><button class="theme-toggle" aria-label="Switch theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button><div class="dropdown"><a href="about.html">About</a><a href="socials.html">Socials</a><a href="anime-clips.html" aria-current="page">Anime Clips</a><a href="zenaris-amvs.html">Zenari's AMVs</a></div></nav></header><main class="wrap"><section class="clips-hero"><div class="terminal-badge animate-fade-up d1"><span class="terminal-prompt"></span><span class="typewriter" data-text="clips/library.txt"></span><span class="terminal-status clip-dot">Live</span></div><h2 class="animate-fade-up d2">The Library</h2><p class="clips-desc animate-fade-up d3"> Browse the full collection of pre-cut anime clips.<br> Use search or the filters to narrow down. </p><div class="search-bar animate-fade-up d4"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" id="clip-search" placeholder="search anime..." aria-label="Search anime clips" autocomplete="off"><button class="search-clear" id="search-clear" aria-label="Clear search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="filter-dropdown animate-fade-up d5" id="filter-dropdown"><button class="filter-toggle" id="filter-toggle"><span>FILTER: <strong id="current-filter">ALL</strong></span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></button><div class="filter-dropdown-menu" id="filter-menu"><button class="filter-option active" data-filter="all">ALL</button><button class="filter-option" data-filter="recently">RECENTLY ADDED</button><button class="filter-option" data-filter="movies">MOVIES</button><button class="filter-option" data-filter="series">SERIES</button><button class="filter-option" data-filter="coming">COMING SOON</button></div></div></section><section class="clips-grid-section"><div class="clips-grid" id="clips-grid"><a href="#" class="clip-tile animate-fade-up d3" data-title="Cyberpunk: Edgerunners" data-category="series" data-coming="true"><div class="clip-tile-bg"><img src="images/cyberpunk-edgerunners.webp" alt="Cyberpunk: Edgerunners" class="clip-tile-img" loading="lazy"><div class="clip-tile-overlay"></div></div><div class="clip-tile-text"><h4>Cyberpunk: Edgerunners</h4><p>Series</p></div><div class="clip-tile-badge">Coming Soon</div></a><a href="#" class="clip-tile animate-fade-up d4" data-title="Bocchi the Rock!" data-category="series" data-coming="true"><div class="clip-tile-bg"><img src="images/bocchi-the-rock.webp" alt="Bocchi the Rock!" class="clip-tile-img" loading="lazy"><div class="clip-tile-overlay"></div></div><div class="clip-tile-text"><h4>Bocchi the Rock!</h4><p>Series</p></div><div class="clip-tile-badge">Coming Soon</div></a><a href="#" class="clip-tile animate-fade-up d5" data-title="Call of the Night" data-category="series" data-coming="true"><div class="clip-tile-bg"><img src="images/call-of-the-night.webp" alt="Call of the Night" class="clip-tile-img" loading="lazy"><div class="clip-tile-overlay"></div></div><div class="clip-tile-text"><h4>Call of the Night</h4><p>Series</p></div><div class="clip-tile-badge">Coming Soon</div></a><a href="#" class="clip-tile animate-fade-up d6" data-title="Chainsaw Man" data-category="series" data-coming="true"><div class="clip-tile-bg"><img src="images/chainsaw-man.webp" alt="Chainsaw Man" class="clip-tile-img" loading="lazy"><div class="clip-tile-overlay"></div></div><div class="clip-tile-text"><h4>Chainsaw Man</h4><p>Series</p></div><div class="clip-tile-badge">Coming Soon</div></a><a href="#" class="clip-tile animate-fade-up d7" data-title="Solo Leveling" data-category="series" data-coming="true"><div class="clip-tile-bg"><img src="images/solo-leveling.webp" alt="Solo Leveling" class="clip-tile-img" loading="lazy"><div class="clip-tile-overlay"></div></div><div class="clip-tile-text"><h4>Solo Leveling</h4><p>Series</p></div><div class="clip-tile-badge">Coming Soon</div></a></div><div class="clips-empty" id="clips-empty" style="display:none;"><p>No clips found matching your search.</p></div></section></main><footer class="site-footer"><div class="footer-inner"><button class="back-to-top" aria-label="Back to top"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V3"/><path d="M3 7l4-4 4 4"/></svg> Back to top </button></div></footer><script src="script.js"></script></body></html>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Satisfy&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=VT323&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"><meta name="theme-color" content="#c77dff"><meta property="og:site_name" content="ZenariFX"><meta property="og:title" content="Anime Clips — Zenari's Page"><meta property="og:description" content="Browse the Full Collection of Pre-Cut Anime Clips!"><meta property="og:image" content="https://zenarifx.github.io/Zenaris-Site/images/og-clips.webp"><meta property="og:url" content="https://zenarifx.github.io/Zenaris-Site/anime-clips.html"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Anime Clips — Zenari's Page"><meta name="twitter:description" content="Browse the Full Collection of Pre-Cut Anime Clips. Raw & Time Remapped."><meta name="twitter:image" content="https://zenarifx.github.io/Zenaris-Site/images/og-clips.webp"></head>
+<body class="page-clips"><div class="particles-container"></div><header><nav><button class="menu-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button><a class="brand" href="index.html">Zenari's Page</a><button class="theme-toggle" aria-label="Switch theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button><div class="dropdown"><a href="about.html">About</a><a href="socials.html">Socials</a><a href="anime-clips.html" aria-current="page">Anime Clips</a><a href="zenaris-amvs.html">Zenari's AMVs</a></div></nav></header>
+<header><nav><button class="menu-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button><a class="brand" href="index.html">Zenari's Page</a><button class="theme-toggle" aria-label="Switch theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button><div class="dropdown"><a href="about.html">About</a><a href="socials.html">Socials</a><a href="anime-clips.html" aria-current="page">Anime Clips</a><a href="zenaris-amvs.html">Zenari's AMVs</a></div></nav></header>
+<main class="wrap" id="library-app">
+  <nav class="lib-breadcrumb" id="lib-breadcrumb" aria-label="Breadcrumb"></nav>
+
+  <!-- VIEW: Anime List -->
+  <div id="view-anime-list" class="lib-view active">
+    <section class="clips-hero">
+      <div class="terminal-badge animate-fade-up d1"><span class="terminal-prompt"></span><span class="typewriter" data-text="clips/library.txt"></span><span class="terminal-status clip-dot">Live</span></div>
+      <h2 class="animate-fade-up d2">The Library</h2>
+      <p class="clips-desc animate-fade-up d3">Browse the full collection of pre-cut anime clips.<br>Use search or the filters to narrow down.</p>
+      <div class="search-bar animate-fade-up d4">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" id="clip-search" placeholder="search anime..." aria-label="Search anime clips" autocomplete="off">
+        <button class="search-clear" id="search-clear" aria-label="Clear search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="filter-dropdown animate-fade-up d5" id="filter-dropdown">
+        <button class="filter-toggle" id="filter-toggle"><span>FILTER: <strong id="current-filter">ALL</strong></span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l4 4 4-4"/></svg></button>
+        <div class="filter-dropdown-menu" id="filter-menu">
+          <button class="filter-option active" data-filter="all">ALL</button>
+          <button class="filter-option" data-filter="recently">RECENTLY ADDED</button>
+          <button class="filter-option" data-filter="movies">MOVIES</button>
+          <button class="filter-option" data-filter="series">SERIES</button>
+          <button class="filter-option" data-filter="coming">COMING SOON</button>
+        </div>
+      </div>
+    </section>
+    <section class="clips-grid-section">
+      <div class="clips-grid" id="clips-grid"></div>
+      <div class="clips-empty" id="clips-empty" style="display:none;"><p>No clips found matching your search.</p></div>
+    </section>
+  </div>
+
+  <!-- VIEW: Anime Detail (Audio Select) -->
+  <div id="view-anime-detail" class="lib-view">
+    <div class="anime-detail-hero">
+      <img class="anime-detail-poster" id="detail-poster" src="" alt="">
+      <div class="anime-detail-info">
+        <span class="anime-detail-type" id="detail-type"></span>
+        <h2 class="anime-detail-title" id="detail-title"></h2>
+        <p class="anime-detail-desc" id="detail-desc"></p>
+        <div class="audio-select" id="audio-select"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW: Seasons -->
+  <div id="view-seasons" class="lib-view">
+    <h3 class="lib-section-title">Select Season</h3>
+    <div class="folder-grid" id="seasons-grid"></div>
+  </div>
+
+  <!-- VIEW: Episodes -->
+  <div id="view-episodes" class="lib-view">
+    <h3 class="lib-section-title">Select Episode</h3>
+    <div class="folder-grid" id="episodes-grid"></div>
+  </div>
+
+  <!-- VIEW: Clips -->
+  <div id="view-clips" class="lib-view">
+    <div class="clips-toolbar">
+      <div class="variant-toggle" id="variant-toggle">
+        <button class="variant-btn active" data-variant="normal">Normal</button>
+        <button class="variant-btn" data-variant="timewarp">Time-Remapped</button>
+      </div>
+    </div>
+    <div class="clip-thumb-grid" id="clips-thumb-grid"></div>
+  </div>
+
+  <!-- VIDEO MODAL -->
+  <div id="video-modal" class="video-modal" aria-hidden="true">
+    <div class="video-modal-backdrop"></div>
+    <div class="video-modal-inner">
+      <div class="video-modal-header">
+        <h3 id="video-title">Clip</h3>
+        <button class="video-modal-close" id="video-modal-close" aria-label="Close">&times;</button>
+      </div>
+      <div class="video-modal-player">
+        <video id="video-player" controls preload="metadata" playsinline></video>
+      </div>
+      <div class="video-modal-actions">
+        <button class="video-btn video-btn-close" id="video-btn-close">Close</button>
+        <a class="video-btn video-btn-download" id="video-download" href="#" download>Download</a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="site-footer"><div class="footer-inner"><button class="back-to-top" aria-label="Back to top"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V3"/><path d="M3 7l4-4 4 4"/></svg> Back to top </button></div></footer>
+<script src="script.js"></script>
+<script>
+// ===================== CONFIG =====================
+const DRIVE_API_KEY = ''; // <-- Paste your Google Drive API key here
+
+function driveStreamUrl(fileId) {
+  if (!DRIVE_API_KEY) return '';
+  return `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${DRIVE_API_KEY}`;
+}
+function driveDownloadUrl(fileId) {
+  return `https://drive.google.com/uc?export=download&id=${fileId}`;
+}
+
+// ===================== DATA =====================
+const CLIP_LIBRARY = {
+  "cyberpunk-edgerunners": {
+    id: "cyberpunk-edgerunners",
+    title: "Cyberpunk: Edgerunners",
+    type: "series",
+    poster: "images/cyberpunk-edgerunners.webp",
+    desc: "In a dystopia riddled with corruption and cybernetic implants, a talented but reckless street kid strives to become a mercenary outlaw.",
+    hasSub: true,
+    hasDub: true,
+    seasons: {
+      "season-1": {
+        id: "season-1",
+        title: "Season 1",
+        episodes: {
+          "episode-1": {
+            id: "episode-1",
+            title: "Episode 1",
+            clips: [
+              {
+                id: "s1e1-opening",
+                name: "Opening Scene",
+                duration: "0:08",
+                thumbnail: "images/cyberpunk-edgerunners.webp",
+                variants: {
+                  "sub-normal": { driveId: "PLACEHOLDER_SUB_NORM" },
+                  "sub-timewarp": { driveId: "PLACEHOLDER_SUB_TW" },
+                  "dub-normal": { driveId: "PLACEHOLDER_DUB_NORM" },
+                  "dub-timewarp": { driveId: "PLACEHOLDER_DUB_TW" }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "bocchi-the-rock": {
+    id: "bocchi-the-rock",
+    title: "Bocchi the Rock!",
+    type: "series",
+    poster: "images/bocchi-the-rock.webp",
+    desc: "A socially anxious girl dreams of becoming a rock guitarist and joins a band.",
+    hasSub: true,
+    hasDub: false,
+    comingSoon: true,
+    seasons: {}
+  },
+  "call-of-the-night": {
+    id: "call-of-the-night",
+    title: "Call of the Night",
+    type: "series",
+    poster: "images/call-of-the-night.webp",
+    desc: "A restless boy falls for a vampire girl and explores the night.",
+    hasSub: true,
+    hasDub: false,
+    comingSoon: true,
+    seasons: {}
+  },
+  "chainsaw-man": {
+    id: "chainsaw-man",
+    title: "Chainsaw Man",
+    type: "series",
+    poster: "images/chainsaw-man.webp",
+    desc: "A young man merges with a devil to become a devil hunter.",
+    hasSub: true,
+    hasDub: false,
+    comingSoon: true,
+    seasons: {}
+  },
+  "solo-leveling": {
+    id: "solo-leveling",
+    title: "Solo Leveling",
+    type: "series",
+    poster: "images/solo-leveling.webp",
+    desc: "The weakest hunter awakens a mysterious power and grows stronger.",
+    hasSub: true,
+    hasDub: false,
+    comingSoon: true,
+    seasons: {}
+  }
+};
+
+// ===================== STATE =====================
+let currentAudio = 'sub';
+let currentVariant = 'normal';
+let currentAnime = null;
+let currentSeason = null;
+let currentEpisode = null;
+
+// ===================== DOM REFS =====================
+const views = {
+  list: document.getElementById('view-anime-list'),
+  detail: document.getElementById('view-anime-detail'),
+  seasons: document.getElementById('view-seasons'),
+  episodes: document.getElementById('view-episodes'),
+  clips: document.getElementById('view-clips')
+};
+const breadcrumb = document.getElementById('lib-breadcrumb');
+const videoModal = document.getElementById('video-modal');
+const videoPlayer = document.getElementById('video-player');
+const videoTitle = document.getElementById('video-title');
+const videoDownload = document.getElementById('video-download');
+
+// ===================== ROUTING =====================
+function parseHash() {
+  const hash = window.location.hash.replace('#', '').trim();
+  if (!hash) return { anime: null, audio: null, season: null, episode: null };
+  const parts = hash.split('/').filter(Boolean);
+  return {
+    anime: parts[0] || null,
+    audio: parts[1] || null,
+    season: parts[2] || null,
+    episode: parts[3] || null
+  };
+}
+
+function navigateTo(hash) {
+  window.location.hash = hash;
+}
+
+function renderView() {
+  const route = parseHash();
+  Object.values(views).forEach(v => v.classList.remove('active'));
+
+  if (!route.anime) {
+    views.list.classList.add('active');
+    renderBreadcrumb([]);
+    return;
+  }
+
+  const anime = CLIP_LIBRARY[route.anime];
+  if (!anime) {
+    navigateTo('');
+    return;
+  }
+  currentAnime = anime;
+
+  if (!route.audio) {
+    views.detail.classList.add('active');
+    renderAnimeDetail(anime);
+    renderBreadcrumb([{ label: 'Library', hash: '' }, { label: anime.title }]);
+    return;
+  }
+  currentAudio = route.audio;
+
+  const seasonKeys = Object.keys(anime.seasons || {});
+  const hasSeasons = seasonKeys.length > 0;
+
+  if (hasSeasons && !route.season) {
+    views.seasons.classList.add('active');
+    renderSeasons(anime);
+    renderBreadcrumb([
+      { label: 'Library', hash: '' },
+      { label: anime.title, hash: route.anime },
+      { label: route.audio.toUpperCase() }
+    ]);
+    return;
+  }
+
+  if (route.season) {
+    currentSeason = anime.seasons[route.season];
+    if (!currentSeason) { navigateTo(`${route.anime}/${route.audio}`); return; }
+
+    const epKeys = Object.keys(currentSeason.episodes || {});
+    if (!route.episode) {
+      views.episodes.classList.add('active');
+      renderEpisodes(currentSeason);
+      renderBreadcrumb([
+        { label: 'Library', hash: '' },
+        { label: anime.title, hash: route.anime },
+        { label: route.audio.toUpperCase(), hash: `${route.anime}/${route.audio}` },
+        { label: currentSeason.title }
+      ]);
+      return;
+    }
+
+    currentEpisode = currentSeason.episodes[route.episode];
+    if (!currentEpisode) { navigateTo(`${route.anime}/${route.audio}/${route.season}`); return; }
+
+    views.clips.classList.add('active');
+    renderClips(currentEpisode);
+    renderBreadcrumb([
+      { label: 'Library', hash: '' },
+      { label: anime.title, hash: route.anime },
+      { label: route.audio.toUpperCase(), hash: `${route.anime}/${route.audio}` },
+      { label: currentSeason.title, hash: `${route.anime}/${route.audio}/${route.season}` },
+      { label: currentEpisode.title }
+    ]);
+    return;
+  }
+
+  // Movie or no seasons — go straight to clips (if any)
+  views.clips.classList.add('active');
+  renderClips({ clips: [] });
+  renderBreadcrumb([
+    { label: 'Library', hash: '' },
+    { label: anime.title, hash: route.anime },
+    { label: route.audio.toUpperCase() }
+  ]);
+}
+
+// ===================== RENDERERS =====================
+function renderBreadcrumb(items) {
+  if (!items.length) {
+    breadcrumb.innerHTML = '';
+    breadcrumb.style.display = 'none';
+    return;
+  }
+  breadcrumb.style.display = 'flex';
+  const html = items.map((item, i) => {
+    if (i === items.length - 1) {
+      return `<span class="bc-current">${escapeHtml(item.label)}</span>`;
+    }
+    return `<a href="#${item.hash || ''}" class="bc-link">${escapeHtml(item.label)}</a><span class="bc-sep">&rsaquo;</span>`;
+  }).join('');
+  breadcrumb.innerHTML = html;
+}
+
+function renderAnimeDetail(anime) {
+  document.getElementById('detail-poster').src = anime.poster;
+  document.getElementById('detail-poster').alt = anime.title;
+  document.getElementById('detail-type').textContent = anime.type;
+  document.getElementById('detail-title').textContent = anime.title;
+  document.getElementById('detail-desc').textContent = anime.desc || '';
+
+  const container = document.getElementById('audio-select');
+  const buttons = [];
+  if (anime.hasSub) buttons.push({ key: 'sub', label: 'Subtitles' });
+  if (anime.hasDub) buttons.push({ key: 'dub', label: 'English Dub' });
+
+  if (anime.comingSoon) {
+    container.innerHTML = '<div class="coming-soon-msg">Coming Soon</div>';
+    return;
+  }
+
+  container.innerHTML = buttons.map(b =>
+    `<button class="audio-btn" data-audio="${b.key}">${b.label}</button>`
+  ).join('');
+
+  container.querySelectorAll('.audio-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      navigateTo(`${anime.id}/${btn.dataset.audio}`);
+    });
+  });
+}
+
+function renderSeasons(anime) {
+  const grid = document.getElementById('seasons-grid');
+  const seasons = Object.values(anime.seasons || {});
+  if (!seasons.length) {
+    grid.innerHTML = '<p class="lib-empty">No seasons available yet.</p>';
+    return;
+  }
+  grid.innerHTML = seasons.map(s => `
+    <a href="#${anime.id}/${currentAudio}/${s.id}" class="folder-card">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+      <span class="folder-name">${escapeHtml(s.title)}</span>
+    </a>
+  `).join('');
+}
+
+function renderEpisodes(season) {
+  const grid = document.getElementById('episodes-grid');
+  const episodes = Object.values(season.episodes || {});
+  if (!episodes.length) {
+    grid.innerHTML = '<p class="lib-empty">No episodes available yet.</p>';
+    return;
+  }
+  grid.innerHTML = `
+    <a href="#${currentAnime.id}/${currentAudio}/${season.id}" class="folder-card folder-back">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+      <span class="folder-name">Previous folder</span>
+    </a>
+  ` + episodes.map(e => `
+    <a href="#${currentAnime.id}/${currentAudio}/${season.id}/${e.id}" class="folder-card">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+      <span class="folder-name">${escapeHtml(e.title)}</span>
+    </a>
+  `).join('');
+}
+
+function renderClips(episode) {
+  const grid = document.getElementById('clips-thumb-grid');
+  const clips = episode.clips || [];
+  if (!clips.length) {
+    grid.innerHTML = '<p class="lib-empty">No clips available yet.</p>';
+    return;
+  }
+
+  const variantKey = `${currentAudio}-${currentVariant}`;
+  grid.innerHTML = clips.map(c => {
+    const variant = c.variants[variantKey];
+    const hasClip = variant && variant.driveId && !variant.driveId.startsWith('PLACEHOLDER');
+    return `
+      <div class="clip-thumb ${hasClip ? '' : 'clip-thumb-disabled'}" data-clip-id="${c.id}">
+        <div class="clip-thumb-img-wrap">
+          <img src="${c.thumbnail || currentAnime.poster}" alt="${escapeHtml(c.name)}" loading="lazy">
+          <span class="clip-thumb-duration">${c.duration}</span>
+          ${hasClip ? '<div class="clip-thumb-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>' : '<div class="clip-thumb-soon">Soon</div>'}
+        </div>
+        <p class="clip-thumb-name">${escapeHtml(c.name)}</p>
+      </div>
+    `;
+  }).join('');
+
+  grid.querySelectorAll('.clip-thumb').forEach(el => {
+    if (el.classList.contains('clip-thumb-disabled')) return;
+    el.addEventListener('click', () => {
+      const clipId = el.dataset.clipId;
+      const clip = clips.find(c => c.id === clipId);
+      if (clip) openVideoModal(clip);
+    });
+  });
+}
+
+function openVideoModal(clip) {
+  const variantKey = `${currentAudio}-${currentVariant}`;
+  const variant = clip.variants[variantKey];
+  if (!variant || !variant.driveId) return;
+
+  videoTitle.textContent = `${currentAnime.title} — ${clip.name}`;
+  const streamUrl = driveStreamUrl(variant.driveId);
+  const downloadUrl = driveDownloadUrl(variant.driveId);
+
+  if (streamUrl) {
+    videoPlayer.src = streamUrl;
+  } else {
+    // Fallback: show message if no API key
+    videoPlayer.removeAttribute('src');
+    videoPlayer.poster = clip.thumbnail || currentAnime.poster;
+  }
+  videoDownload.href = downloadUrl;
+
+  videoModal.classList.add('open');
+  videoModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVideoModal() {
+  videoModal.classList.remove('open');
+  videoModal.setAttribute('aria-hidden', 'true');
+  videoPlayer.pause();
+  videoPlayer.removeAttribute('src');
+  videoPlayer.load();
+  document.body.style.overflow = '';
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// ===================== EVENTS =====================
+window.addEventListener('hashchange', renderView);
+
+document.getElementById('video-modal-close').addEventListener('click', closeVideoModal);
+document.getElementById('video-btn-close').addEventListener('click', closeVideoModal);
+document.querySelector('.video-modal-backdrop').addEventListener('click', closeVideoModal);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVideoModal(); });
+
+// Variant toggle
+document.getElementById('variant-toggle').addEventListener('click', e => {
+  const btn = e.target.closest('.variant-btn');
+  if (!btn) return;
+  document.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentVariant = btn.dataset.variant;
+  if (currentEpisode) renderClips(currentEpisode);
+});
+
+// ===================== INIT =====================
+function initLibrary() {
+  // Build anime list tiles from CLIP_LIBRARY
+  const grid = document.getElementById('clips-grid');
+  const animes = Object.values(CLIP_LIBRARY);
+  grid.innerHTML = animes.map((a, i) => `
+    <a href="#${a.id}" class="clip-tile animate-fade-up d${Math.min(i+3, 9)}" data-title="${escapeHtml(a.title)}" data-category="${a.type}" data-coming="${a.comingSoon ? 'true' : 'false'}">
+      <div class="clip-tile-bg">
+        <img src="${a.poster}" alt="${escapeHtml(a.title)}" class="clip-tile-img" loading="lazy">
+        <div class="clip-tile-overlay"></div>
+      </div>
+      <div class="clip-tile-text">
+        <h4>${escapeHtml(a.title)}</h4>
+        <p>${a.type === 'movie' ? 'Movie' : 'Series'}</p>
+      </div>
+      ${a.comingSoon ? '<div class="clip-tile-badge">Coming Soon</div>' : ''}
+    </a>
+  `).join('');
+
+  renderView();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initLibrary);
+} else {
+  initLibrary();
+}
+</script>
+</body>
+</html>
