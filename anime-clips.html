@@ -1,7 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Anime Clips - Zenari's Page</title><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Satisfy&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=VT323&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"><meta name="theme-color" content="#c77dff"><meta property="og:site_name" content="ZenariFX"><meta property="og:title" content="Anime Clips — Zenari's Page"><meta property="og:description" content="Browse the Full Collection of Pre-Cut Anime Clips!"><meta property="og:image" content="https://zenarifx.github.io/Zenaris-Site/images/og-clips.webp"><meta property="og:url" content="https://zenarifx.github.io/Zenaris-Site/anime-clips.html"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Anime Clips — Zenari's Page"><meta name="twitter:description" content="Browse the Full Collection of Pre-Cut Anime Clips. Raw & Time Remapped."><meta name="twitter:image" content="https://zenarifx.github.io/Zenaris-Site/images/og-clips.webp"></head>
 <body class="page-clips"><div class="particles-container"></div><header><nav><button class="menu-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button><a class="brand" href="index.html">Zenari's Page</a><button class="theme-toggle" aria-label="Switch theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button><div class="dropdown"><a href="about.html">About</a><a href="socials.html">Socials</a><a href="anime-clips.html" aria-current="page">Anime Clips</a><a href="zenaris-amvs.html">Zenari's AMVs</a></div></nav></header>
-<header><nav><button class="menu-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button><a class="brand" href="index.html">Zenari's Page</a><button class="theme-toggle" aria-label="Switch theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button><div class="dropdown"><a href="about.html">About</a><a href="socials.html">Socials</a><a href="anime-clips.html" aria-current="page">Anime Clips</a><a href="zenaris-amvs.html">Zenari's AMVs</a></div></nav></header>
 <main class="wrap" id="library-app">
   <nav class="lib-breadcrumb" id="lib-breadcrumb" aria-label="Breadcrumb"></nav>
 
@@ -85,6 +84,13 @@
         <a class="video-btn video-btn-download" id="video-download" href="#" download>Download</a>
       </div>
     </div>
+  </div>
+
+  <!-- BULK DOWNLOAD BAR -->
+  <div id="bulk-bar" class="bulk-bar" style="display:none;">
+    <span class="bulk-count"><span id="bulk-count">0</span> selected</span>
+    <button class="bulk-btn" id="bulk-download">Download Selected</button>
+    <button class="bulk-clear" id="bulk-clear">Clear</button>
   </div>
 </main>
 <footer class="site-footer"><div class="footer-inner"><button class="back-to-top" aria-label="Back to top"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V3"/><path d="M3 7l4-4 4 4"/></svg> Back to top </button></div></footer>
@@ -190,6 +196,7 @@ let currentVariant = 'normal';
 let currentAnime = null;
 let currentSeason = null;
 let currentEpisode = null;
+let selectedFolders = new Set();
 
 // ===================== DOM REFS =====================
 const views = {
@@ -204,6 +211,8 @@ const videoModal = document.getElementById('video-modal');
 const videoPlayer = document.getElementById('video-player');
 const videoTitle = document.getElementById('video-title');
 const videoDownload = document.getElementById('video-download');
+const bulkBar = document.getElementById('bulk-bar');
+const bulkCount = document.getElementById('bulk-count');
 
 // ===================== ROUTING =====================
 function parseHash() {
@@ -225,6 +234,8 @@ function navigateTo(hash) {
 function renderView() {
   const route = parseHash();
   Object.values(views).forEach(v => v.classList.remove('active'));
+  closeAllMenus();
+  clearSelection();
 
   if (!route.anime) {
     views.list.classList.add('active');
@@ -355,11 +366,27 @@ function renderSeasons(anime) {
     grid.innerHTML = '<p class="lib-empty">No seasons available yet.</p>';
     return;
   }
-  grid.innerHTML = seasons.map(s => `
-    <a href="#${anime.id}/${currentAudio}/${s.id}" class="folder-card">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-      <span class="folder-name">${escapeHtml(s.title)}</span>
+  grid.innerHTML = `
+    <a href="#${anime.id}" class="folder-card folder-back">
+      <span class="folder-main">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        <span class="folder-name">Previous folder</span>
+      </span>
     </a>
+  ` + seasons.map(s => `
+    <div class="folder-card" data-type="season" data-id="${s.id}">
+      <input type="checkbox" class="folder-check" data-type="season" data-id="${s.id}">
+      <a href="#${anime.id}/${currentAudio}/${s.id}" class="folder-main">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        <span class="folder-name">${escapeHtml(s.title)}</span>
+      </a>
+      <button class="folder-menu-btn" data-type="season" data-id="${s.id}" aria-label="Options">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>
+      </button>
+      <div class="folder-menu-dropdown" data-type="season" data-id="${s.id}">
+        <button class="folder-menu-item download-all-btn" data-type="season" data-id="${s.id}">Download All Clips</button>
+      </div>
+    </div>
   `).join('');
 }
 
@@ -370,16 +397,28 @@ function renderEpisodes(season) {
     grid.innerHTML = '<p class="lib-empty">No episodes available yet.</p>';
     return;
   }
+  // FIX: link back to seasons list, not the same season
   grid.innerHTML = `
-    <a href="#${currentAnime.id}/${currentAudio}/${season.id}" class="folder-card folder-back">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-      <span class="folder-name">Previous folder</span>
+    <a href="#${currentAnime.id}/${currentAudio}" class="folder-card folder-back">
+      <span class="folder-main">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        <span class="folder-name">Previous folder</span>
+      </span>
     </a>
   ` + episodes.map(e => `
-    <a href="#${currentAnime.id}/${currentAudio}/${season.id}/${e.id}" class="folder-card">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-      <span class="folder-name">${escapeHtml(e.title)}</span>
-    </a>
+    <div class="folder-card" data-type="episode" data-id="${e.id}">
+      <input type="checkbox" class="folder-check" data-type="episode" data-id="${e.id}">
+      <a href="#${currentAnime.id}/${currentAudio}/${season.id}/${e.id}" class="folder-main">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        <span class="folder-name">${escapeHtml(e.title)}</span>
+      </a>
+      <button class="folder-menu-btn" data-type="episode" data-id="${e.id}" aria-label="Options">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>
+      </button>
+      <div class="folder-menu-dropdown" data-type="episode" data-id="${e.id}">
+        <button class="folder-menu-item download-all-btn" data-type="episode" data-id="${e.id}">Download All Clips</button>
+      </div>
+    </div>
   `).join('');
 }
 
@@ -397,12 +436,11 @@ function renderClips(episode) {
     const hasClip = variant && variant.driveId && !variant.driveId.startsWith('PLACEHOLDER');
     return `
       <div class="clip-thumb ${hasClip ? '' : 'clip-thumb-disabled'}" data-clip-id="${c.id}">
-        <div class="clip-thumb-img-wrap">
-          <img src="${c.thumbnail || currentAnime.poster}" alt="${escapeHtml(c.name)}" loading="lazy">
-          <span class="clip-thumb-duration">${c.duration}</span>
-          ${hasClip ? '<div class="clip-thumb-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>' : '<div class="clip-thumb-soon">Soon</div>'}
-        </div>
-        <p class="clip-thumb-name">${escapeHtml(c.name)}</p>
+        <img src="${c.thumbnail || currentAnime.poster}" alt="${escapeHtml(c.name)}" loading="lazy">
+        <span class="clip-thumb-duration">${c.duration}</span>
+        ${hasClip
+          ? '<div class="clip-thumb-play"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>'
+          : '<div class="clip-thumb-soon">Soon</div>'}
       </div>
     `;
   }).join('');
@@ -429,7 +467,6 @@ function openVideoModal(clip) {
   if (streamUrl) {
     videoPlayer.src = streamUrl;
   } else {
-    // Fallback: show message if no API key
     videoPlayer.removeAttribute('src');
     videoPlayer.poster = clip.thumbnail || currentAnime.poster;
   }
@@ -455,6 +492,61 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
+// ===================== DOWNLOAD HELPERS =====================
+function collectDriveIdsFromEpisode(episode, audio, variant) {
+  const ids = [];
+  const vkey = `${audio}-${variant}`;
+  for (const clip of (episode.clips || [])) {
+    const v = clip.variants[vkey];
+    if (v && v.driveId && !v.driveId.startsWith('PLACEHOLDER')) {
+      ids.push({ driveId: v.driveId, name: `${currentAnime.title} - ${clip.name}.mp4` });
+    }
+  }
+  return ids;
+}
+
+function collectDriveIdsFromSeason(season, audio, variant) {
+  const ids = [];
+  for (const ep of Object.values(season.episodes || {})) {
+    ids.push(...collectDriveIdsFromEpisode(ep, audio, variant));
+  }
+  return ids;
+}
+
+function downloadFiles(files) {
+  if (!files.length) return;
+  files.forEach((f, i) => {
+    setTimeout(() => {
+      const a = document.createElement('a');
+      a.href = driveDownloadUrl(f.driveId);
+      a.download = f.name;
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }, i * 400);
+  });
+}
+
+function closeAllMenus() {
+  document.querySelectorAll('.folder-menu-dropdown.open').forEach(d => d.classList.remove('open'));
+}
+
+function clearSelection() {
+  selectedFolders.clear();
+  document.querySelectorAll('.folder-check').forEach(cb => cb.checked = false);
+  updateBulkBar();
+}
+
+function updateBulkBar() {
+  if (selectedFolders.size > 0) {
+    bulkBar.style.display = 'flex';
+    bulkCount.textContent = selectedFolders.size;
+  } else {
+    bulkBar.style.display = 'none';
+  }
+}
+
 // ===================== EVENTS =====================
 window.addEventListener('hashchange', renderView);
 
@@ -473,9 +565,77 @@ document.getElementById('variant-toggle').addEventListener('click', e => {
   if (currentEpisode) renderClips(currentEpisode);
 });
 
+// Folder menu toggle & download
+document.addEventListener('click', e => {
+  const menuBtn = e.target.closest('.folder-menu-btn');
+  if (menuBtn) {
+    const type = menuBtn.dataset.type;
+    const id = menuBtn.dataset.id;
+    const dropdown = document.querySelector(`.folder-menu-dropdown[data-type="${type}"][data-id="${id}"]`);
+    if (dropdown) {
+      const isOpen = dropdown.classList.contains('open');
+      closeAllMenus();
+      if (!isOpen) dropdown.classList.add('open');
+    }
+    return;
+  }
+
+  const downloadBtn = e.target.closest('.download-all-btn');
+  if (downloadBtn) {
+    const type = downloadBtn.dataset.type;
+    const id = downloadBtn.dataset.id;
+    let files = [];
+    if (type === 'season') {
+      const season = currentAnime.seasons[id];
+      if (season) files = collectDriveIdsFromSeason(season, currentAudio, currentVariant);
+    } else if (type === 'episode') {
+      const episode = currentSeason.episodes[id];
+      if (episode) files = collectDriveIdsFromEpisode(episode, currentAudio, currentVariant);
+    }
+    if (files.length) downloadFiles(files);
+    closeAllMenus();
+    return;
+  }
+
+  // Close menus when clicking outside
+  if (!e.target.closest('.folder-menu-dropdown')) {
+    closeAllMenus();
+  }
+});
+
+// Checkbox selection
+document.addEventListener('change', e => {
+  if (e.target.classList.contains('folder-check')) {
+    const id = e.target.dataset.id;
+    const type = e.target.dataset.type;
+    const key = `${type}:${id}`;
+    if (e.target.checked) selectedFolders.add(key);
+    else selectedFolders.delete(key);
+    updateBulkBar();
+  }
+});
+
+// Bulk download
+document.getElementById('bulk-download').addEventListener('click', () => {
+  const files = [];
+  for (const key of selectedFolders) {
+    const [type, id] = key.split(':');
+    if (type === 'season') {
+      const season = currentAnime.seasons[id];
+      if (season) files.push(...collectDriveIdsFromSeason(season, currentAudio, currentVariant));
+    } else if (type === 'episode') {
+      const episode = currentSeason.episodes[id];
+      if (episode) files.push(...collectDriveIdsFromEpisode(episode, currentAudio, currentVariant));
+    }
+  }
+  if (files.length) downloadFiles(files);
+});
+
+// Bulk clear
+document.getElementById('bulk-clear').addEventListener('click', clearSelection);
+
 // ===================== INIT =====================
 function initLibrary() {
-  // Build anime list tiles from CLIP_LIBRARY
   const grid = document.getElementById('clips-grid');
   const animes = Object.values(CLIP_LIBRARY);
   grid.innerHTML = animes.map((a, i) => `
