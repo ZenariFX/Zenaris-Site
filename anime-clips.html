@@ -97,8 +97,10 @@
 <script src="script.js"></script>
 <script>
 // ===================== CONFIG =====================
+const R2_BASE_URL = 'https://clips.zenarifx.com';
 // R2 clips are served via direct public URLs. No API key needed.
-// Example: https://pub-<hash>.r2.dev/cyberpunk-edgerunners/season-1/episode-1/clip.mp4
+// Upload clips to your bucket and paste the full URL (or use R2_BASE_URL + path).
+// Example: https://clips.zenarifx.com/cyberpunk-edgerunners/season-1/episode-1/clip-sub-normal.mp4
 
 // ===================== DATA =====================
 const CLIP_LIBRARY = {
@@ -125,6 +127,8 @@ const CLIP_LIBRARY = {
                 duration: "0:08",
                 thumbnail: "images/cyberpunk-edgerunners.webp",
                 variants: {
+                  // Paste your clip URLs below after uploading to R2
+                  // Example: { url: `${R2_BASE_URL}/cyberpunk-edgerunners/season-1/episode-1/opening-sub-normal.mp4` }
                   "sub-normal": { url: "" },
                   "sub-timewarp": { url: "" },
                   "dub-normal": { url: "" },
@@ -333,7 +337,7 @@ function renderAnimeDetail(anime) {
 
   const container = document.getElementById('audio-select');
   const buttons = [];
-  if (anime.hasSub) buttons.push({ key: 'sub', label: 'Subtitles' });
+  if (anime.hasSub) buttons.push({ key: 'sub', label: 'Original' });
   if (anime.hasDub) buttons.push({ key: 'dub', label: 'English Dub' });
 
   if (anime.comingSoon) {
