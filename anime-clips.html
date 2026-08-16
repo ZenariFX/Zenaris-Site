@@ -97,15 +97,8 @@
 <script src="script.js"></script>
 <script>
 // ===================== CONFIG =====================
-const DRIVE_API_KEY = ''; // <-- Paste your Google Drive API key here
-
-function driveStreamUrl(fileId) {
-  if (!DRIVE_API_KEY) return '';
-  return `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${DRIVE_API_KEY}`;
-}
-function driveDownloadUrl(fileId) {
-  return `https://drive.google.com/uc?export=download&id=${fileId}`;
-}
+// R2 clips are served via direct public URLs. No API key needed.
+// Example: https://pub-<hash>.r2.dev/cyberpunk-edgerunners/season-1/episode-1/clip.mp4
 
 // ===================== DATA =====================
 const CLIP_LIBRARY = {
@@ -132,10 +125,10 @@ const CLIP_LIBRARY = {
                 duration: "0:08",
                 thumbnail: "images/cyberpunk-edgerunners.webp",
                 variants: {
-                  "sub-normal": { driveId: "PLACEHOLDER_SUB_NORM" },
-                  "sub-timewarp": { driveId: "PLACEHOLDER_SUB_TW" },
-                  "dub-normal": { driveId: "PLACEHOLDER_DUB_NORM" },
-                  "dub-timewarp": { driveId: "PLACEHOLDER_DUB_TW" }
+                  "sub-normal": { url: "" },
+                  "sub-timewarp": { url: "" },
+                  "dub-normal": { url: "" },
+                  "dub-timewarp": { url: "" }
                 }
               }
             ]
@@ -397,7 +390,6 @@ function renderEpisodes(season) {
     grid.innerHTML = '<p class="lib-empty">No episodes available yet.</p>';
     return;
   }
-  // FIX: link back to seasons list, not the same season
   grid.innerHTML = `
     <a href="#${currentAnime.id}/${currentAudio}" class="folder-card folder-back">
       <span class="folder-main">
@@ -433,7 +425,7 @@ function renderClips(episode) {
   const variantKey = `${currentAudio}-${currentVariant}`;
   grid.innerHTML = clips.map(c => {
     const variant = c.variants[variantKey];
-    const hasClip = variant && variant.driveId && !variant.driveId.startsWith('PLACEHOLDER');
+    const hasClip = variant && variant.url && variant.url.trim() !== '';
     return `
       <div class="clip-thumb ${hasClip ? '' : 'clip-thumb-disabled'}" data-clip-id="${c.id}">
         <img src="${c.thumbnail || currentAnime.poster}" alt="${escapeHtml(c.name)}" loading="lazy">
@@ -458,19 +450,12 @@ function renderClips(episode) {
 function openVideoModal(clip) {
   const variantKey = `${currentAudio}-${currentVariant}`;
   const variant = clip.variants[variantKey];
-  if (!variant || !variant.driveId) return;
+  if (!variant || !variant.url) return;
 
   videoTitle.textContent = `${currentAnime.title} — ${clip.name}`;
-  const streamUrl = driveStreamUrl(variant.driveId);
-  const downloadUrl = driveDownloadUrl(variant.driveId);
-
-  if (streamUrl) {
-    videoPlayer.src = streamUrl;
-  } else {
-    videoPlayer.removeAttribute('src');
-    videoPlayer.poster = clip.thumbnail || currentAnime.poster;
-  }
-  videoDownload.href = downloadUrl;
+  videoPlayer.src = variant.url;
+  videoDownload.href = variant.url;
+  videoDownload.download = `${currentAnime.title} - ${clip.name}.mp4`;
 
   videoModal.classList.add('open');
   videoModal.setAttribute('aria-hidden', 'false');
@@ -493,24 +478,24 @@ function escapeHtml(text) {
 }
 
 // ===================== DOWNLOAD HELPERS =====================
-function collectDriveIdsFromEpisode(episode, audio, variant) {
-  const ids = [];
+function collectUrlsFromEpisode(episode, audio, variant) {
+  const urls = [];
   const vkey = `${audio}-${variant}`;
   for (const clip of (episode.clips || [])) {
     const v = clip.variants[vkey];
-    if (v && v.driveId && !v.driveId.startsWith('PLACEHOLDER')) {
-      ids.push({ driveId: v.driveId, name: `${currentAnime.title} - ${clip.name}.mp4` });
+    if (v && v.url && v.url.trim() !== '') {
+      urls.push({ url: v.url, name: `${currentAnime.title} - ${clip.name}.mp4` });
     }
   }
-  return ids;
+  return urls;
 }
 
-function collectDriveIdsFromSeason(season, audio, variant) {
-  const ids = [];
+function collectUrlsFromSeason(season, audio, variant) {
+  const urls = [];
   for (const ep of Object.values(season.episodes || {})) {
-    ids.push(...collectDriveIdsFromEpisode(ep, audio, variant));
+    urls.push(...collectUrlsFromEpisode(ep, audio, variant));
   }
-  return ids;
+  return urls;
 }
 
 function downloadFiles(files) {
@@ -518,7 +503,7 @@ function downloadFiles(files) {
   files.forEach((f, i) => {
     setTimeout(() => {
       const a = document.createElement('a');
-      a.href = driveDownloadUrl(f.driveId);
+      a.href = f.url;
       a.download = f.name;
       a.target = '_blank';
       document.body.appendChild(a);
@@ -587,10 +572,10 @@ document.addEventListener('click', e => {
     let files = [];
     if (type === 'season') {
       const season = currentAnime.seasons[id];
-      if (season) files = collectDriveIdsFromSeason(season, currentAudio, currentVariant);
+      if (season) files = collectUrlsFromSeason(season, currentAudio, currentVariant);
     } else if (type === 'episode') {
       const episode = currentSeason.episodes[id];
-      if (episode) files = collectDriveIdsFromEpisode(episode, currentAudio, currentVariant);
+      if (episode) files = collectUrlsFromEpisode(episode, currentAudio, currentVariant);
     }
     if (files.length) downloadFiles(files);
     closeAllMenus();
@@ -622,10 +607,10 @@ document.getElementById('bulk-download').addEventListener('click', () => {
     const [type, id] = key.split(':');
     if (type === 'season') {
       const season = currentAnime.seasons[id];
-      if (season) files.push(...collectDriveIdsFromSeason(season, currentAudio, currentVariant));
+      if (season) files.push(...collectUrlsFromSeason(season, currentAudio, currentVariant));
     } else if (type === 'episode') {
       const episode = currentSeason.episodes[id];
-      if (episode) files.push(...collectDriveIdsFromEpisode(episode, currentAudio, currentVariant));
+      if (episode) files.push(...collectUrlsFromEpisode(episode, currentAudio, currentVariant));
     }
   }
   if (files.length) downloadFiles(files);
