@@ -66,8 +66,21 @@
       </div>
     </div>
     <div class="clip-thumb-grid" id="clips-thumb-grid"></div>
+    <div class="audio-list" id="audio-list" style="display:none;"></div>
   </div>
 
+
+  <!-- AUDIO MODAL -->
+  <div id="audio-modal" class="audio-modal" aria-hidden="true">
+    <div class="audio-modal-backdrop"></div>
+    <div class="audio-modal-inner">
+      <button class="audio-modal-close" id="audio-modal-close" aria-label="Close">&times;</button>
+      <h3 id="audio-title">Audio</h3>
+      <audio id="audio-player" controls preload="metadata" style="width:100%;"></audio>
+      <a id="audio-download" class="audio-download-btn" href="#" download>Download MP3</a>
+      <button class="audio-btn-close" id="audio-btn-close">Close</button>
+    </div>
+  </div>
   <!-- VIDEO MODAL -->
   <div id="video-modal" class="video-modal" aria-hidden="true">
     <div class="video-modal-backdrop"></div>
@@ -124,9 +137,10 @@ const CLIP_LIBRARY = {
                 duration: "0:08",
                 thumbnail: "images/cyberpunk-edgerunners.webp",
                 variants: {
-                  // Paste your clip URLs below after uploading to R2
                   "sub-normal": { url: "" },
                   "dub-normal": { url: "" },
+                  "sub-audio": { url: "" },
+                  "dub-audio": { url: "" },
                   "timewarp": { url: "" }
                 }
               }
@@ -183,6 +197,7 @@ const CLIP_LIBRARY = {
 };
 
 // ===================== STATE =====================
+let currentMode = 'normal';
 let currentAudio = 'sub';
 let currentVariant = 'normal';
 let currentAnime = null;
@@ -203,8 +218,14 @@ const videoModal = document.getElementById('video-modal');
 const videoPlayer = document.getElementById('video-player');
 const videoTitle = document.getElementById('video-title');
 const videoDownload = document.getElementById('video-download');
+const audioModal = document.getElementById('audio-modal');
+const audioPlayer = document.getElementById('audio-player');
+const audioTitle = document.getElementById('audio-title');
+const audioDownload = document.getElementById('audio-download');
 const bulkBar = document.getElementById('bulk-bar');
 const bulkCount = document.getElementById('bulk-count');
+const clipsGrid = document.getElementById('clips-thumb-grid');
+const audioList = document.getElementById('audio-list');
 
 // ===================== ROUTING =====================
 function parseHash() {
@@ -250,10 +271,6 @@ function renderView() {
   closeAllMenus();
   clearSelection();
 
-  // Hide/show variant toolbar
-  const toolbar = document.querySelector('.clips-toolbar');
-  if (toolbar) toolbar.style.display = 'none';
-
   if (!route.anime) {
     views.list.classList.add('active');
     renderBreadcrumb([]);
@@ -264,15 +281,14 @@ function renderView() {
   if (!anime) { navigateTo(''); return; }
   currentAnime = anime;
 
-  // STEP 1: Anime detail — choose mode (Time-Remapped / Normal / Audios)
   if (!route.mode) {
     views.detail.classList.add('active');
     renderModeSelect(anime);
     renderBreadcrumb([{ label: 'Library', hash: '' }, { label: anime.title }]);
     return;
   }
+  currentMode = route.mode;
 
-  // STEP 2a: Time-Remapped — skip audio, go straight to seasons
   if (route.mode === 'timewarp') {
     currentVariant = 'timewarp';
     currentAudio = 'sub';
@@ -307,6 +323,8 @@ function renderView() {
     if (!currentEpisode) { navigateTo(`${route.anime}/timewarp/${route.season}`); return; }
 
     views.clips.classList.add('active');
+    clipsGrid.style.display = 'grid';
+    audioList.style.display = 'none';
     renderClips(currentEpisode);
     renderBreadcrumb([
       { label: 'Library', hash: '' },
@@ -318,7 +336,6 @@ function renderView() {
     return;
   }
 
-  // STEP 2b: Normal or Audios — show audio selection first
   currentVariant = 'normal';
 
   if (!route.audio) {
@@ -366,8 +383,17 @@ function renderView() {
   if (!currentEpisode) { navigateTo(`${route.anime}/${route.mode}/${route.audio}/${route.season}`); return; }
 
   views.clips.classList.add('active');
-  if (toolbar) toolbar.style.display = 'flex';
-  renderClips(currentEpisode);
+
+  if (route.mode === 'audio') {
+    clipsGrid.style.display = 'none';
+    audioList.style.display = 'flex';
+    renderAudioClips(currentEpisode);
+  } else {
+    clipsGrid.style.display = 'grid';
+    audioList.style.display = 'none';
+    renderClips(currentEpisode);
+  }
+
   renderBreadcrumb([
     { label: 'Library', hash: '' },
     { label: anime.title, hash: route.anime },
@@ -510,15 +536,14 @@ function renderEpisodes(season, opts = {}) {
 }
 
 function renderClips(episode) {
-  const grid = document.getElementById('clips-thumb-grid');
   const clips = episode.clips || [];
   if (!clips.length) {
-    grid.innerHTML = '<p class="lib-empty">No clips available yet.</p>';
+    clipsGrid.innerHTML = '<p class="lib-empty">No clips available yet.</p>';
     return;
   }
 
-  const variantKey = currentVariant === 'timewarp' ? 'timewarp' : `${currentAudio}-${currentVariant}`;
-  grid.innerHTML = clips.map(c => {
+  const variantKey = `${currentAudio}-normal`;
+  clipsGrid.innerHTML = clips.map(c => {
     const variant = c.variants[variantKey];
     const hasClip = variant && variant.url && variant.url.trim() !== '';
     return `
@@ -532,7 +557,7 @@ function renderClips(episode) {
     `;
   }).join('');
 
-  grid.querySelectorAll('.clip-thumb').forEach(el => {
+  clipsGrid.querySelectorAll('.clip-thumb').forEach(el => {
     if (el.classList.contains('clip-thumb-disabled')) return;
     el.addEventListener('click', () => {
       const clipId = el.dataset.clipId;
@@ -542,8 +567,50 @@ function renderClips(episode) {
   });
 }
 
+function renderAudioClips(episode) {
+  const clips = episode.clips || [];
+  if (!clips.length) {
+    audioList.innerHTML = '<p class="lib-empty">No audio clips available yet.</p>';
+    return;
+  }
+
+  const variantKey = `${currentAudio}-audio`;
+  audioList.innerHTML = clips.map(c => {
+    const variant = c.variants[variantKey];
+    const hasClip = variant && variant.url && variant.url.trim() !== '';
+    return `
+      <div class="audio-item ${hasClip ? '' : 'audio-item-disabled'}" data-clip-id="${c.id}">
+        <div class="audio-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <div class="audio-info">
+          <span class="audio-name">${escapeHtml(c.name)}</span>
+          <span class="audio-tag">MP3</span>
+        </div>
+        <span class="audio-duration">${c.duration}</span>
+        ${hasClip
+          ? '<button class="audio-play-btn" aria-label="Play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>'
+          : '<span class="audio-soon">Soon</span>'}
+      </div>
+    `;
+  }).join('');
+
+  audioList.querySelectorAll('.audio-item').forEach(el => {
+    if (el.classList.contains('audio-item-disabled')) return;
+    const playBtn = el.querySelector('.audio-play-btn');
+    if (playBtn) {
+      playBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const clipId = el.dataset.clipId;
+        const clip = clips.find(c => c.id === clipId);
+        if (clip) openAudioModal(clip);
+      });
+    }
+  });
+}
+
 function openVideoModal(clip) {
-  const variantKey = currentVariant === 'timewarp' ? 'timewarp' : `${currentAudio}-${currentVariant}`;
+  const variantKey = `${currentAudio}-normal`;
   const variant = clip.variants[variantKey];
   if (!variant || !variant.url) return;
 
@@ -566,6 +633,30 @@ function closeVideoModal() {
   document.body.style.overflow = '';
 }
 
+function openAudioModal(clip) {
+  const variantKey = `${currentAudio}-audio`;
+  const variant = clip.variants[variantKey];
+  if (!variant || !variant.url) return;
+
+  audioTitle.textContent = `${currentAnime.title} — ${clip.name}`;
+  audioPlayer.src = variant.url;
+  audioDownload.href = variant.url;
+  audioDownload.download = `${currentAnime.title} - ${clip.name}.mp3`;
+
+  audioModal.classList.add('open');
+  audioModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAudioModal() {
+  audioModal.classList.remove('open');
+  audioModal.setAttribute('aria-hidden', 'true');
+  audioPlayer.pause();
+  audioPlayer.removeAttribute('src');
+  audioPlayer.load();
+  document.body.style.overflow = '';
+}
+
 function escapeHtml(text) {
   const div = document.createElement('div');
   div.textContent = text;
@@ -573,22 +664,23 @@ function escapeHtml(text) {
 }
 
 // ===================== DOWNLOAD HELPERS =====================
-function collectUrlsFromEpisode(episode, audio, variant) {
+function collectUrlsFromEpisode(episode, audio, mode) {
   const urls = [];
-  const vkey = variant === 'timewarp' ? 'timewarp' : `${audio}-${variant}`;
+  const vkey = mode === 'timewarp' ? 'timewarp' : (mode === 'audio' ? `${audio}-audio` : `${audio}-normal`);
   for (const clip of (episode.clips || [])) {
     const v = clip.variants[vkey];
     if (v && v.url && v.url.trim() !== '') {
-      urls.push({ url: v.url, name: `${currentAnime.title} - ${clip.name}.mp4` });
+      const ext = mode === 'audio' ? 'mp3' : 'mp4';
+      urls.push({ url: v.url, name: `${currentAnime.title} - ${clip.name}.${ext}` });
     }
   }
   return urls;
 }
 
-function collectUrlsFromSeason(season, audio, variant) {
+function collectUrlsFromSeason(season, audio, mode) {
   const urls = [];
   for (const ep of Object.values(season.episodes || {})) {
-    urls.push(...collectUrlsFromEpisode(ep, audio, variant));
+    urls.push(...collectUrlsFromEpisode(ep, audio, mode));
   }
   return urls;
 }
@@ -630,16 +722,21 @@ function updateBulkBar() {
 // ===================== EVENTS =====================
 window.addEventListener('hashchange', renderView);
 
+// Video modal
 document.getElementById('video-modal-close').addEventListener('click', closeVideoModal);
 document.getElementById('video-btn-close').addEventListener('click', closeVideoModal);
 document.querySelector('.video-modal-backdrop').addEventListener('click', closeVideoModal);
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVideoModal(); });
 
-// Variant toggle (only visible in Normal/Audios mode, locked to Normal)
-document.getElementById('variant-toggle').addEventListener('click', e => {
-  const btn = e.target.closest('.variant-btn');
-  if (!btn) return;
-  // Locked to current variant — no switching on clips page
+// Audio modal
+document.getElementById('audio-modal-close').addEventListener('click', closeAudioModal);
+document.getElementById('audio-btn-close').addEventListener('click', closeAudioModal);
+document.querySelector('.audio-modal-backdrop').addEventListener('click', closeAudioModal);
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeVideoModal();
+    closeAudioModal();
+  }
 });
 
 // Folder menu toggle & download
@@ -664,10 +761,10 @@ document.addEventListener('click', e => {
     let files = [];
     if (type === 'season') {
       const season = currentAnime.seasons[id];
-      if (season) files = collectUrlsFromSeason(season, currentAudio, currentVariant);
+      if (season) files = collectUrlsFromSeason(season, currentAudio, currentMode);
     } else if (type === 'episode') {
       const episode = currentSeason.episodes[id];
-      if (episode) files = collectUrlsFromEpisode(episode, currentAudio, currentVariant);
+      if (episode) files = collectUrlsFromEpisode(episode, currentAudio, currentMode);
     }
     if (files.length) downloadFiles(files);
     closeAllMenus();
@@ -698,10 +795,10 @@ document.getElementById('bulk-download').addEventListener('click', () => {
     const [type, id] = key.split(':');
     if (type === 'season') {
       const season = currentAnime.seasons[id];
-      if (season) files.push(...collectUrlsFromSeason(season, currentAudio, currentVariant));
+      if (season) files.push(...collectUrlsFromSeason(season, currentAudio, currentMode));
     } else if (type === 'episode') {
       const episode = currentSeason.episodes[id];
-      if (episode) files.push(...collectUrlsFromEpisode(episode, currentAudio, currentVariant));
+      if (episode) files.push(...collectUrlsFromEpisode(episode, currentAudio, currentMode));
     }
   }
   if (files.length) downloadFiles(files);
