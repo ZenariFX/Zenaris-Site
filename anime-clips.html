@@ -98,9 +98,6 @@
 <script>
 // ===================== CONFIG =====================
 const R2_BASE_URL = 'https://clips.zenarifx.com';
-// R2 clips are served via direct public URLs. No API key needed.
-// Upload clips to your bucket and paste the full URL (or use R2_BASE_URL + path).
-// Example: https://clips.zenarifx.com/cyberpunk-edgerunners/season-1/episode-1/clip-sub-normal.mp4
 
 // ===================== DATA =====================
 const CLIP_LIBRARY = {
@@ -128,11 +125,9 @@ const CLIP_LIBRARY = {
                 thumbnail: "images/cyberpunk-edgerunners.webp",
                 variants: {
                   // Paste your clip URLs below after uploading to R2
-                  // Example: { url: `${R2_BASE_URL}/cyberpunk-edgerunners/season-1/episode-1/opening-sub-normal.mp4` }
                   "sub-normal": { url: "" },
-                  "sub-timewarp": { url: "" },
                   "dub-normal": { url: "" },
-                  "dub-timewarp": { url: "" }
+                  "timewarp": { url: "" }
                 }
               }
             ]
@@ -214,13 +209,34 @@ const bulkCount = document.getElementById('bulk-count');
 // ===================== ROUTING =====================
 function parseHash() {
   const hash = window.location.hash.replace('#', '').trim();
-  if (!hash) return { anime: null, audio: null, season: null, episode: null };
+  if (!hash) return { anime: null, mode: null, audio: null, season: null, episode: null };
   const parts = hash.split('/').filter(Boolean);
+
+  const anime = parts[0] || null;
+  if (!anime) return { anime: null, mode: null, audio: null, season: null, episode: null };
+
+  const mode = parts[1] || null;
+  if (!mode) return { anime, mode: null, audio: null, season: null, episode: null };
+
+  if (mode === 'timewarp') {
+    return {
+      anime,
+      mode: 'timewarp',
+      audio: 'sub',
+      season: parts[2] || null,
+      episode: parts[3] || null
+    };
+  }
+
+  const audio = parts[2] || null;
+  if (!audio) return { anime, mode, audio: null, season: null, episode: null };
+
   return {
-    anime: parts[0] || null,
-    audio: parts[1] || null,
-    season: parts[2] || null,
-    episode: parts[3] || null
+    anime,
+    mode,
+    audio,
+    season: parts[3] || null,
+    episode: parts[4] || null
   };
 }
 
@@ -234,6 +250,10 @@ function renderView() {
   closeAllMenus();
   clearSelection();
 
+  // Hide/show variant toolbar
+  const toolbar = document.querySelector('.clips-toolbar');
+  if (toolbar) toolbar.style.display = 'none';
+
   if (!route.anime) {
     views.list.classList.add('active');
     renderBreadcrumb([]);
@@ -241,73 +261,120 @@ function renderView() {
   }
 
   const anime = CLIP_LIBRARY[route.anime];
-  if (!anime) {
-    navigateTo('');
-    return;
-  }
+  if (!anime) { navigateTo(''); return; }
   currentAnime = anime;
 
-  if (!route.audio) {
+  // STEP 1: Anime detail — choose mode (Time-Remapped / Normal / Audios)
+  if (!route.mode) {
     views.detail.classList.add('active');
-    renderAnimeDetail(anime);
+    renderModeSelect(anime);
     renderBreadcrumb([{ label: 'Library', hash: '' }, { label: anime.title }]);
     return;
   }
-  currentAudio = route.audio;
 
-  const seasonKeys = Object.keys(anime.seasons || {});
-  const hasSeasons = seasonKeys.length > 0;
+  // STEP 2a: Time-Remapped — skip audio, go straight to seasons
+  if (route.mode === 'timewarp') {
+    currentVariant = 'timewarp';
+    currentAudio = 'sub';
 
-  if (hasSeasons && !route.season) {
-    views.seasons.classList.add('active');
-    renderSeasons(anime);
-    renderBreadcrumb([
-      { label: 'Library', hash: '' },
-      { label: anime.title, hash: route.anime },
-      { label: route.audio.toUpperCase() }
-    ]);
-    return;
-  }
-
-  if (route.season) {
-    currentSeason = anime.seasons[route.season];
-    if (!currentSeason) { navigateTo(`${route.anime}/${route.audio}`); return; }
-
-    const epKeys = Object.keys(currentSeason.episodes || {});
-    if (!route.episode) {
-      views.episodes.classList.add('active');
-      renderEpisodes(currentSeason);
+    if (!route.season) {
+      views.seasons.classList.add('active');
+      renderSeasons(anime, { backHash: route.anime });
       renderBreadcrumb([
         { label: 'Library', hash: '' },
         { label: anime.title, hash: route.anime },
-        { label: route.audio.toUpperCase(), hash: `${route.anime}/${route.audio}` },
+        { label: 'Time-Remapped' }
+      ]);
+      return;
+    }
+
+    currentSeason = anime.seasons[route.season];
+    if (!currentSeason) { navigateTo(`${route.anime}/timewarp`); return; }
+
+    if (!route.episode) {
+      views.episodes.classList.add('active');
+      renderEpisodes(currentSeason, { backHash: `${route.anime}/timewarp` });
+      renderBreadcrumb([
+        { label: 'Library', hash: '' },
+        { label: anime.title, hash: route.anime },
+        { label: 'Time-Remapped', hash: `${route.anime}/timewarp` },
         { label: currentSeason.title }
       ]);
       return;
     }
 
     currentEpisode = currentSeason.episodes[route.episode];
-    if (!currentEpisode) { navigateTo(`${route.anime}/${route.audio}/${route.season}`); return; }
+    if (!currentEpisode) { navigateTo(`${route.anime}/timewarp/${route.season}`); return; }
 
     views.clips.classList.add('active');
     renderClips(currentEpisode);
     renderBreadcrumb([
       { label: 'Library', hash: '' },
       { label: anime.title, hash: route.anime },
-      { label: route.audio.toUpperCase(), hash: `${route.anime}/${route.audio}` },
-      { label: currentSeason.title, hash: `${route.anime}/${route.audio}/${route.season}` },
+      { label: 'Time-Remapped', hash: `${route.anime}/timewarp` },
+      { label: currentSeason.title, hash: `${route.anime}/timewarp/${route.season}` },
       { label: currentEpisode.title }
     ]);
     return;
   }
 
-  // Movie or no seasons — go straight to clips (if any)
+  // STEP 2b: Normal or Audios — show audio selection first
+  currentVariant = 'normal';
+
+  if (!route.audio) {
+    views.detail.classList.add('active');
+    renderAudioSelect(anime, route.mode);
+    renderBreadcrumb([
+      { label: 'Library', hash: '' },
+      { label: anime.title, hash: route.anime },
+      { label: route.mode === 'normal' ? 'Normal' : 'Audios' }
+    ]);
+    return;
+  }
+
+  currentAudio = route.audio;
+
+  if (!route.season) {
+    views.seasons.classList.add('active');
+    renderSeasons(anime, { backHash: `${route.anime}/${route.mode}/${route.audio}` });
+    renderBreadcrumb([
+      { label: 'Library', hash: '' },
+      { label: anime.title, hash: route.anime },
+      { label: route.mode === 'normal' ? 'Normal' : 'Audios', hash: `${route.anime}/${route.mode}` },
+      { label: route.audio.toUpperCase() }
+    ]);
+    return;
+  }
+
+  currentSeason = anime.seasons[route.season];
+  if (!currentSeason) { navigateTo(`${route.anime}/${route.mode}/${route.audio}`); return; }
+
+  if (!route.episode) {
+    views.episodes.classList.add('active');
+    renderEpisodes(currentSeason, { backHash: `${route.anime}/${route.mode}/${route.audio}` });
+    renderBreadcrumb([
+      { label: 'Library', hash: '' },
+      { label: anime.title, hash: route.anime },
+      { label: route.mode === 'normal' ? 'Normal' : 'Audios', hash: `${route.anime}/${route.mode}` },
+      { label: route.audio.toUpperCase(), hash: `${route.anime}/${route.mode}/${route.audio}` },
+      { label: currentSeason.title }
+    ]);
+    return;
+  }
+
+  currentEpisode = currentSeason.episodes[route.episode];
+  if (!currentEpisode) { navigateTo(`${route.anime}/${route.mode}/${route.audio}/${route.season}`); return; }
+
   views.clips.classList.add('active');
-  renderClips({ clips: [] });
+  if (toolbar) toolbar.style.display = 'flex';
+  renderClips(currentEpisode);
   renderBreadcrumb([
     { label: 'Library', hash: '' },
     { label: anime.title, hash: route.anime },
-    { label: route.audio.toUpperCase() }
+    { label: route.mode === 'normal' ? 'Normal' : 'Audios', hash: `${route.anime}/${route.mode}` },
+    { label: route.audio.toUpperCase(), hash: `${route.anime}/${route.mode}/${route.audio}` },
+    { label: currentSeason.title, hash: `${route.anime}/${route.mode}/${route.audio}/${route.season}` },
+    { label: currentEpisode.title }
   ]);
 }
 
@@ -328,7 +395,34 @@ function renderBreadcrumb(items) {
   breadcrumb.innerHTML = html;
 }
 
-function renderAnimeDetail(anime) {
+function renderModeSelect(anime) {
+  document.getElementById('detail-poster').src = anime.poster;
+  document.getElementById('detail-poster').alt = anime.title;
+  document.getElementById('detail-type').textContent = anime.type;
+  document.getElementById('detail-title').textContent = anime.title;
+  document.getElementById('detail-desc').textContent = anime.desc || '';
+
+  const container = document.getElementById('audio-select');
+
+  if (anime.comingSoon) {
+    container.innerHTML = '<div class="coming-soon-msg">Coming Soon</div>';
+    return;
+  }
+
+  container.innerHTML = `
+    <button class="audio-btn" data-mode="timewarp">Time-Remapped</button>
+    <button class="audio-btn" data-mode="normal">Normal</button>
+    <button class="audio-btn" data-mode="audio">Audios</button>
+  `;
+
+  container.querySelectorAll('.audio-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      navigateTo(`${anime.id}/${btn.dataset.mode}`);
+    });
+  });
+}
+
+function renderAudioSelect(anime, mode) {
   document.getElementById('detail-poster').src = anime.poster;
   document.getElementById('detail-poster').alt = anime.title;
   document.getElementById('detail-type').textContent = anime.type;
@@ -340,31 +434,27 @@ function renderAnimeDetail(anime) {
   if (anime.hasSub) buttons.push({ key: 'sub', label: 'Original' });
   if (anime.hasDub) buttons.push({ key: 'dub', label: 'English Dub' });
 
-  if (anime.comingSoon) {
-    container.innerHTML = '<div class="coming-soon-msg">Coming Soon</div>';
-    return;
-  }
-
   container.innerHTML = buttons.map(b =>
     `<button class="audio-btn" data-audio="${b.key}">${b.label}</button>`
   ).join('');
 
   container.querySelectorAll('.audio-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      navigateTo(`${anime.id}/${btn.dataset.audio}`);
+      navigateTo(`${anime.id}/${mode}/${btn.dataset.audio}`);
     });
   });
 }
 
-function renderSeasons(anime) {
+function renderSeasons(anime, opts = {}) {
   const grid = document.getElementById('seasons-grid');
   const seasons = Object.values(anime.seasons || {});
   if (!seasons.length) {
     grid.innerHTML = '<p class="lib-empty">No seasons available yet.</p>';
     return;
   }
+  const backHash = opts.backHash || anime.id;
   grid.innerHTML = `
-    <a href="#${anime.id}" class="folder-card folder-back">
+    <a href="#${backHash}" class="folder-card folder-back">
       <span class="folder-main">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
         <span class="folder-name">Previous folder</span>
@@ -373,7 +463,7 @@ function renderSeasons(anime) {
   ` + seasons.map(s => `
     <div class="folder-card" data-type="season" data-id="${s.id}">
       <input type="checkbox" class="folder-check" data-type="season" data-id="${s.id}">
-      <a href="#${anime.id}/${currentAudio}/${s.id}" class="folder-main">
+      <a href="#${window.location.hash.replace('#','')}/${s.id}" class="folder-main">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
         <span class="folder-name">${escapeHtml(s.title)}</span>
       </a>
@@ -387,15 +477,16 @@ function renderSeasons(anime) {
   `).join('');
 }
 
-function renderEpisodes(season) {
+function renderEpisodes(season, opts = {}) {
   const grid = document.getElementById('episodes-grid');
   const episodes = Object.values(season.episodes || {});
   if (!episodes.length) {
     grid.innerHTML = '<p class="lib-empty">No episodes available yet.</p>';
     return;
   }
+  const backHash = opts.backHash || `${currentAnime.id}/${currentAudio}`;
   grid.innerHTML = `
-    <a href="#${currentAnime.id}/${currentAudio}" class="folder-card folder-back">
+    <a href="#${backHash}" class="folder-card folder-back">
       <span class="folder-main">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
         <span class="folder-name">Previous folder</span>
@@ -404,7 +495,7 @@ function renderEpisodes(season) {
   ` + episodes.map(e => `
     <div class="folder-card" data-type="episode" data-id="${e.id}">
       <input type="checkbox" class="folder-check" data-type="episode" data-id="${e.id}">
-      <a href="#${currentAnime.id}/${currentAudio}/${season.id}/${e.id}" class="folder-main">
+      <a href="#${window.location.hash.replace('#','')}/${e.id}" class="folder-main">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
         <span class="folder-name">${escapeHtml(e.title)}</span>
       </a>
@@ -426,7 +517,7 @@ function renderClips(episode) {
     return;
   }
 
-  const variantKey = `${currentAudio}-${currentVariant}`;
+  const variantKey = currentVariant === 'timewarp' ? 'timewarp' : `${currentAudio}-${currentVariant}`;
   grid.innerHTML = clips.map(c => {
     const variant = c.variants[variantKey];
     const hasClip = variant && variant.url && variant.url.trim() !== '';
@@ -452,7 +543,7 @@ function renderClips(episode) {
 }
 
 function openVideoModal(clip) {
-  const variantKey = `${currentAudio}-${currentVariant}`;
+  const variantKey = currentVariant === 'timewarp' ? 'timewarp' : `${currentAudio}-${currentVariant}`;
   const variant = clip.variants[variantKey];
   if (!variant || !variant.url) return;
 
@@ -484,7 +575,7 @@ function escapeHtml(text) {
 // ===================== DOWNLOAD HELPERS =====================
 function collectUrlsFromEpisode(episode, audio, variant) {
   const urls = [];
-  const vkey = `${audio}-${variant}`;
+  const vkey = variant === 'timewarp' ? 'timewarp' : `${audio}-${variant}`;
   for (const clip of (episode.clips || [])) {
     const v = clip.variants[vkey];
     if (v && v.url && v.url.trim() !== '') {
@@ -544,14 +635,11 @@ document.getElementById('video-btn-close').addEventListener('click', closeVideoM
 document.querySelector('.video-modal-backdrop').addEventListener('click', closeVideoModal);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVideoModal(); });
 
-// Variant toggle
+// Variant toggle (only visible in Normal/Audios mode, locked to Normal)
 document.getElementById('variant-toggle').addEventListener('click', e => {
   const btn = e.target.closest('.variant-btn');
   if (!btn) return;
-  document.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  currentVariant = btn.dataset.variant;
-  if (currentEpisode) renderClips(currentEpisode);
+  // Locked to current variant — no switching on clips page
 });
 
 // Folder menu toggle & download
@@ -586,7 +674,6 @@ document.addEventListener('click', e => {
     return;
   }
 
-  // Close menus when clicking outside
   if (!e.target.closest('.folder-menu-dropdown')) {
     closeAllMenus();
   }
