@@ -1,142 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FAQ — Zenari's Page</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Zenari's Page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Satisfy&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<meta name="theme-color" content="#ff6b6b">
+<meta property="og:site_name" content="ZenariFX">
+<meta property="og:title" content="FAQ — Zenari's Page">
+<meta property="og:description" content="Frequently asked questions about Zenari's Page, clips, downloads, and more.">
+<meta property="og:image" content="https://zenarifx.github.io/Zenaris-Site/images/og-home.webp">
+<meta property="og:url" content="https://zenarifx.github.io/Zenaris-Site/faq.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FAQ — Zenari's Page">
+<meta name="twitter:description" content="Everything you need to know about Zenari's Page, clips, downloads, and more.">
+<meta name="twitter:image" content="https://zenarifx.github.io/Zenaris-Site/images/og-home.webp">
 </head>
-<body>
-  <div class="cursor-glow"></div>
-  <div class="noise-overlay"></div>
+<body class="page-faq">
 
-  <header>
-    <nav>
-      <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
-        <span></span><span></span><span></span>
+<div class="particles-container"></div>
+
+<header>
+  <nav>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="brand" href="index.html" data-hover-color="#00e58a">Zenari's Page</a>
+    <div class="dropdown">
+      <a href="about.html">About</a>
+      <a href="socials.html" data-hover-color="#f4a261">Socials</a>
+      <a href="anime-clips.html" data-hover-color="#c77dff">Anime Clips</a>
+      <a href="faq.html" aria-current="page">FAQ</a>
+      <a href="zenaris-amvs.html" data-hover-color="#ffd60a">Zenari's AMVs</a>
+    </div>
+    <button class="search-btn" id="search-btn" aria-label="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="faq-hero">
+    <div class="terminal-badge animate-fade-up d1">
+      <span class="terminal-prompt"></span>
+      <span class="typewriter" data-text="faq/help.txt"></span>
+      <span class="terminal-status info-dot">Info</span>
+    </div>
+    <h1 class="animate-fade-up d2">Frequently Asked Questions</h1>
+    <p class="animate-fade-up d3">Everything you need to know about Zenari's Page, clips, downloads, and more.</p>
+  </section>
+
+  <div class="faq-list" id="faq-list">
+    <div class="faq-item animate-fade-up d4">
+      <button class="faq-question">
+        What is Zenari's Page?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
-      <a class="brand" href="index.html">Zenari's Page</a>
-      <button class="search-btn" id="search-btn" aria-label="Search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <div class="faq-answer">
+        <p>Zenari's Page is a portfolio site for anime AMVs, pre-cut anime clips, and social links. All clips are free to download and use for your own edits.</p>
+      </div>
+    </div>
+
+    <div class="faq-item animate-fade-up d5">
+      <button class="faq-question">
+        How do I download clips?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
-      <div class="dropdown">
-        <a href="about.html">About</a>
-        <a href="socials.html">Socials</a>
-        <a href="anime-clips.html">Anime Clips</a>
-        <a href="zenaris-amvs.html">Zenari's AMVs</a>
-        <a href="faq.html" aria-current="page">FAQ</a>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <div class="container">
-      <div class="faq-hero">
-        <h1>Frequently Asked Questions</h1>
-        <p>Everything you need to know about Zenari's Page, clips, downloads, and more.</p>
-      </div>
-
-      <div class="faq-list" id="faq-list">
-        <div class="faq-item">
-          <button class="faq-question">
-            What is Zenari's Page?
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer">
-            <p>Zenari's Page is a portfolio site for anime AMVs, pre-cut anime clips, and social links. All clips are free to download and use for your own edits.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">
-            How do I download clips?
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer">
-            <p>Navigate to the Anime Clips Library, select an anime, choose your preferred mode (Time-Remapped, Normal, or Audios), then pick a season and episode. You can download individual clips or use the 3-dot menu / checkboxes to bulk download entire folders.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">
-            What are time-remapped clips?
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer">
-            <p>Time-remapped clips are edited to sync with music beats using speed ramps and frame blending. They're pre-cut for AMV editors who want ready-to-use footage that flows with rhythm.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">
-            Where are the clips hosted?
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer">
-            <p>All clips are hosted on Cloudflare R2 — a fast, reliable object storage with zero bandwidth fees. This means smooth streaming and fast downloads no matter where you are.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">
-            Can I request a specific anime or clip?
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer">
-            <p>Yes! Reach out through the Socials page or Discord to suggest new anime or specific scenes you'd like to see added to the library.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">
-            What is the difference between Normal and Audios?
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer">
-            <p>Normal clips are standard video clips with full audio tracks (Original or English Dub). Audios are MP3-only audio extracts from scenes — useful for sound design, sampling, or voice-line references.</p>
-          </div>
-        </div>
+      <div class="faq-answer">
+        <p>Navigate to the Anime Clips Library, select an anime, choose your preferred mode (Time-Remapped, Normal, or Audios), then pick a season and episode. You can download individual clips or use the 3-dot menu / checkboxes to bulk download entire folders.</p>
       </div>
     </div>
 
-    <!-- SEARCH MODAL -->
-    <div id="search-modal" class="search-modal" aria-hidden="true">
-      <div class="search-modal-backdrop"></div>
-      <div class="search-modal-inner">
-        <button class="search-modal-close" id="search-modal-close" aria-label="Close">&times;</button>
-        <input type="text" class="search-modal-input" id="search-input" placeholder="Search the site..." autocomplete="off">
-        <div class="search-results" id="search-results"></div>
+    <div class="faq-item animate-fade-up d6">
+      <button class="faq-question">
+        What are time-remapped clips?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>Time-remapped clips are edited to sync with music beats using speed ramps and frame blending. They're pre-cut for AMV editors who want ready-to-use footage that flows with rhythm.</p>
       </div>
     </div>
-  </main>
 
-  <footer>
-    <div class="footer-content">
-      <div class="footer-brand">Zenari's Page</div>
-      <div class="footer-links">
-        <a href="about.html">About</a>
-        <a href="socials.html">Socials</a>
-        <a href="anime-clips.html">Anime Clips</a>
-        <a href="zenaris-amvs.html">Zenari's AMVs</a>
-        <a href="faq.html">FAQ</a>
+    <div class="faq-item animate-fade-up d7">
+      <button class="faq-question">
+        Where are the clips hosted?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>All clips are hosted on Cloudflare R2 — a fast, reliable object storage with zero bandwidth fees. This means smooth streaming and fast downloads no matter where you are.</p>
       </div>
-      <div class="footer-copy">&copy; 2026 ZenariFX. All rights reserved.</div>
     </div>
-  </footer>
 
-  <script src="script.js"></script>
-  <script>
-    // FAQ accordion
-    document.querySelectorAll('.faq-question').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const item = btn.closest('.faq-item');
-        const isOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-        if (!isOpen) item.classList.add('open');
-      });
+    <div class="faq-item animate-fade-up d8">
+      <button class="faq-question">
+        Can I request a specific anime or clip?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>Yes! Reach out through the Socials page or Discord to suggest new anime or specific scenes you'd like to see added to the library.</p>
+      </div>
+    </div>
+
+    <div class="faq-item animate-fade-up d9">
+      <button class="faq-question">
+        What is the difference between Normal and Audios?
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>Normal clips are standard video clips with full audio tracks (Original or English Dub). Audios are MP3-only audio extracts from scenes — useful for sound design, sampling, or voice-line references.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <button class="back-to-top" aria-label="Back to top">
+      <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V3"/><path d="M3 7l4-4 4 4"/></svg>
+      Back to top
+    </button>
+  </div>
+</footer>
+
+<!-- SEARCH MODAL -->
+<div id="search-modal" class="search-modal" aria-hidden="true">
+  <div class="search-modal-backdrop"></div>
+  <div class="search-modal-inner">
+    <button class="search-modal-close" id="search-modal-close" aria-label="Close">&times;</button>
+    <input type="text" class="search-modal-input" id="search-input" placeholder="Search the site..." autocomplete="off">
+    <div class="search-results" id="search-results"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
     });
-  </script>
+  });
+</script>
 </body>
 </html>

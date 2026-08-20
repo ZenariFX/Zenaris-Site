@@ -559,11 +559,14 @@ function renderClips(episode) {
     const hasClip = variant && variant.url && variant.url.trim() !== '';
     return `
       <div class="clip-thumb ${hasClip ? '' : 'clip-thumb-disabled'}" data-clip-id="${c.id}">
-        <img src="${c.thumbnail || currentAnime.poster}" alt="${escapeHtml(c.name)}" loading="lazy">
-        <span class="clip-thumb-duration">${c.duration}</span>
-        ${hasClip
-          ? '<div class="clip-thumb-play"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>'
-          : '<div class="clip-thumb-soon">Soon</div>'}
+        <div class="clip-thumb-img-wrap">
+          <img src="${c.thumbnail || currentAnime.poster}" alt="${escapeHtml(c.name)}" loading="lazy">
+          <span class="clip-thumb-duration">${c.duration}</span>
+          ${hasClip
+            ? '<div class="clip-thumb-play"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>'
+            : '<div class="clip-thumb-soon">Soon</div>'}
+        </div>
+        <div class="clip-thumb-name">${escapeHtml(c.name)}</div>
       </div>
     `;
   }).join('');
