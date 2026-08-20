@@ -26,7 +26,7 @@
 
 /* Anime Detail Hero */
 .anime-detail-hero{display:flex;gap:2rem;align-items:flex-start;padding:2rem 0;flex-wrap:wrap}
-.anime-detail-poster{width:220px;height:auto;max-height:420px;object-fit:contain;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.4);flex-shrink:0}
+
 .anime-detail-info{flex:1;min-width:260px}
 .anime-detail-type{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--accent);border:1px solid var(--accent);padding:.25rem .6rem;border-radius:4px;margin-bottom:.75rem}
 .anime-detail-title{font-family:'Space Grotesk',sans-serif;font-size:2.2rem;font-weight:700;margin-bottom:.75rem;color:var(--text)}
@@ -92,7 +92,7 @@
 /* Responsive */
 @media (max-width:640px){
   .anime-detail-hero{flex-direction:column;align-items:center;text-align:center}
-  .anime-detail-poster{width:160px;height:auto;max-height:320px}
+  
   .anime-detail-title{font-size:1.6rem}
   .audio-select{justify-content:center}
   .folder-grid{grid-template-columns:1fr}
@@ -128,6 +128,69 @@
 .audio-btn-close:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,229,138,.06)}
 @media(max-width:640px){.audio-modal-inner{margin:.5rem;border-radius:12px}}
 
+
+/* ===================== FOLDER CARD UI FIXES ===================== */
+.folder-card{position:relative;overflow:visible}
+.folder-main{display:flex;align-items:center;gap:.5rem;flex:1;min-width:0;text-decoration:none;color:inherit}
+.folder-check{
+  width:18px;
+  height:18px;
+  accent-color:var(--accent);
+  cursor:pointer;
+  flex-shrink:0;
+  appearance:none;
+  -webkit-appearance:none;
+  background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(255,255,255,.15);
+  border-radius:5px;
+  position:relative;
+  transition:all .2s;
+  color-scheme:dark;
+  margin:0;
+  box-shadow:none
+}
+.folder-check:checked{
+  background:var(--accent);
+  border-color:var(--accent)
+}
+.folder-check:checked::after{
+  content:'';
+  position:absolute;
+  left:5px;
+  top:2px;
+  width:4px;
+  height:8px;
+  border:solid var(--accent-ink);
+  border-width:0 2px 2px 0;
+  transform:rotate(45deg)
+}
+.folder-menu-btn{margin-left:auto;background:none;border:none;color:var(--text-secondary);padding:.35rem;border-radius:6px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.folder-menu-btn:hover{color:var(--accent);background:rgba(0,229,138,.08)}
+.folder-menu-dropdown{position:absolute;top:calc(100% + 4px);right:.5rem;z-index:10;background:var(--card);border:1.5px solid rgba(255,255,255,.12);border-radius:10px;padding:.35rem 0;box-shadow:0 12px 32px rgba(0,0,0,.5);display:none;min-width:180px}
+.folder-menu-dropdown.open{display:block}
+.folder-menu-item{display:block;width:100%;padding:.6rem 1rem;background:transparent;border:none;color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:.75rem;font-weight:500;text-transform:uppercase;letter-spacing:.06em;text-align:left;cursor:pointer;transition:all .15s}
+.folder-menu-item:hover{background:rgba(0,229,138,.08);color:var(--accent)}
+.download-all-btn{background:transparent;border:none;color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:.75rem;font-weight:500;text-transform:uppercase;letter-spacing:.06em;padding:.6rem 1rem;cursor:pointer;transition:all .15s;width:100%;text-align:left}
+.download-all-btn:hover{background:rgba(0,229,138,.08);color:var(--accent)}
+
+/* ===================== AUDIO ITEM FIXES ===================== */
+.audio-item{display:flex;align-items:center;gap:.75rem;padding:.9rem 1rem;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;transition:all .2s ease;cursor:pointer}
+.audio-item:hover{border-color:var(--accent);background:rgba(0,229,138,.06)}
+.audio-item-disabled{opacity:.4;cursor:not-allowed}
+.audio-item-disabled:hover{border-color:rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+.audio-icon{flex-shrink:0;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;color:var(--accent)}
+.audio-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:.15rem}
+.audio-name{font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.audio-tag{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--accent);background:rgba(0,229,138,.1);padding:.15rem .4rem;border-radius:4px;display:inline-block;width:fit-content}
+.audio-duration{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--text-secondary);flex-shrink:0}
+.audio-play-btn{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--accent);color:var(--accent-ink);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:opacity .2s}
+.audio-play-btn:hover{opacity:.85}
+.audio-soon{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.06em;flex-shrink:0}
+
+/* ===================== ANIME POSTER BIGGER ===================== */
+.anime-detail-poster{width:380px;height:auto;max-height:560px;object-fit:contain;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.4);flex-shrink:0}
+@media(max-width:768px){.anime-detail-poster{width:300px;height:auto;max-height:440px}}
+
 /* ===================== FAQ PAGE ===================== */
 .faq-hero{text-align:center;padding:3rem 0 1.5rem}.faq-hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.8rem,5vw,2.6rem);font-weight:700;margin-bottom:.5rem}.faq-hero p{color:var(--text-secondary);font-size:.95rem;max-width:480px;margin:0 auto}.faq-list{max-width:720px;margin:0 auto;padding:1rem 0 3rem;display:flex;flex-direction:column;gap:.6rem}.faq-item{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;transition:border-color .2s}.faq-item:hover{border-color:rgba(255,255,255,.15)}.faq-question{width:100%;padding:1rem 1.25rem;background:none;border:none;color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:600;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;transition:color .2s}.faq-question:hover{color:var(--accent)}.faq-question svg{flex-shrink:0;width:18px;height:18px;transition:transform .25s ease;color:var(--text-secondary)}.faq-item.open .faq-question svg{transform:rotate(180deg)}.faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease}.faq-item.open .faq-answer{max-height:300px;padding:0 1.25rem 1.25rem}.faq-answer p{color:var(--text-secondary);font-size:.9rem;line-height:1.65}
 
@@ -139,3 +202,10 @@ body.page-faq::after{background:#ee5a6f}
 body.page-faq .typewriter-cursor{background:#ff6b6b}
 body.page-faq .arrow-down{color:#ff6b6b}
 
+
+audio{color-scheme:dark;width:100%;border-radius:8px}
+.audio-modal-inner{color-scheme:dark}
+
+@media(max-width:640px){.video-modal-player video{max-height:50vh}}
+
+.audio-list{display:flex;flex-direction:column;gap:.75rem;padding-bottom:2rem}
