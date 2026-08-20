@@ -77,3 +77,12 @@ document.addEventListener('keydown', e => {
     openSearch();
   }
 });
+
+/* Auto-scroll active nav link into view */
+document.addEventListener('DOMContentLoaded', () => {
+  const navScroll = document.querySelector('.nav-scroll');
+  const activeLink = document.querySelector('.nav-scroll .nav-link.active');
+  if (navScroll && activeLink) {
+    activeLink.scrollIntoView({inline: 'center', behavior: 'auto'});
+  }
+});
