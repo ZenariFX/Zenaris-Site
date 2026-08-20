@@ -1,8 +1,14 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Anime Clips - Zenari's Page</title><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Satisfy&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=VT323&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"><meta name="theme-color" content="#c77dff"><meta property="og:site_name" content="ZenariFX"><meta property="og:title" content="Anime Clips — Zenari's Page"><meta property="og:description" content="Browse the Full Collection of Pre-Cut Anime Clips!"><meta property="og:image" content="https://zenarifx.github.io/Zenaris-Site/images/og-clips.webp"><meta property="og:url" content="https://zenarifx.github.io/Zenaris-Site/anime-clips.html"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Anime Clips — Zenari's Page"><meta name="twitter:description" content="Browse the Full Collection of Pre-Cut Anime Clips. Raw & Time Remapped."><meta name="twitter:image" content="https://zenarifx.github.io/Zenaris-Site/images/og-clips.webp"></head>
-<body class="page-clips"><div class="particles-container"></div><header><nav><button class="menu-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button><a class="brand" href="index.html">Zenari's Page</a><button class="theme-toggle" aria-label="Switch theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button><div class="dropdown"><a href="about.html">About</a><a href="socials.html">Socials</a><a href="anime-clips.html" aria-current="page">Anime Clips</a><a href="zenaris-amvs.html">Zenari's AMVs</a></div></nav></header>
+<body class="page-clips"><div class="particles-container"></div><header><nav><button class="menu-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button><a class="brand" href="index.html">Zenari's Page</a><div class="dropdown"><a href="about.html">About</a><a href="socials.html">Socials</a><a href="anime-clips.html" aria-current="page">Anime Clips</a><a href="faq.html">FAQ</a><a href="zenaris-amvs.html">Zenari's AMVs</a></div><button class="search-btn" id="search-btn" aria-label="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    </nav></header>
 <main class="wrap" id="library-app">
-  <nav class="lib-breadcrumb" id="lib-breadcrumb" aria-label="Breadcrumb"></nav>
+  <nav class="lib-breadcrumb" id="lib-breadcrumb" aria-label="Breadcrumb"><button class="search-btn" id="search-btn" aria-label="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    </nav>
 
   <!-- VIEW: Anime List -->
   <div id="view-anime-list" class="lib-view active">
@@ -99,6 +105,17 @@
     <button class="bulk-btn" id="bulk-download">Download Selected</button>
     <button class="bulk-clear" id="bulk-clear">Clear</button>
   </div>
+
+  <!-- SEARCH MODAL -->
+  <div id="search-modal" class="search-modal" aria-hidden="true">
+    <div class="search-modal-backdrop"></div>
+    <div class="search-modal-inner">
+      <button class="search-modal-close" id="search-modal-close" aria-label="Close">&times;</button>
+      <input type="text" class="search-modal-input" id="search-input" placeholder="Search the site..." autocomplete="off">
+      <div class="search-results" id="search-results"></div>
+    </div>
+  </div>
+
 </main>
 <footer class="site-footer"><div class="footer-inner"><button class="back-to-top" aria-label="Back to top"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V3"/><path d="M3 7l4-4 4 4"/></svg> Back to top </button></div></footer>
 <script src="script.js"></script>
