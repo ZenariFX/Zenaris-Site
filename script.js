@@ -83,6 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const navScroll = document.querySelector('.nav-scroll');
   const activeLink = document.querySelector('.nav-scroll .nav-link.active');
   if (navScroll && activeLink) {
-    activeLink.scrollIntoView({inline: 'center', behavior: 'auto'});
+    const containerWidth = navScroll.offsetWidth;
+    const linkLeft = activeLink.offsetLeft;
+    const linkWidth = activeLink.offsetWidth;
+    navScroll.scrollLeft = linkLeft - (containerWidth / 2) + (linkWidth / 2);
   }
 });
