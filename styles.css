@@ -219,3 +219,11 @@ body.page-faq .back-to-top:hover{color:#ff6b6b;background:rgba(255,107,107,0.08)
 body.page-faq .typewriter-cursor{background:#ff6b6b}
 
 body.page-faq .particle{background:#ff6b6b}
+
+@media (max-width:640px){
+.search-modal{padding-top:10vh;padding-left:16px;padding-right:16px}
+.search-modal-inner{max-width:100%;border-radius:14px;padding:1rem}
+.search-modal-input{font-size:16px;padding:.65rem .85rem}
+.search-results{max-height:50vh}
+.search-result{padding:.55rem .7rem}
+}
