@@ -13,12 +13,6 @@
     <a href="about.html" class="nav-link">About</a>
     <a href="faq.html" class="nav-link">FAQ</a>
 </div>
-  <div id="search-dropdown" class="search-dropdown" aria-hidden="true">
-    <div class="search-dropdown-inner">
-      <input type="text" class="search-dropdown-input" id="search-input" placeholder="Search the site..." autocomplete="off">
-      <div class="search-results" id="search-results"></div>
-    </div>
-  </div>
   
 </header>
 <main class="wrap" id="library-app">
@@ -124,6 +118,15 @@
   </div>
   </div>
 
+  <!-- SEARCH MODAL -->
+  <div id="search-modal" class="search-modal" aria-hidden="true">
+    <div class="search-modal-backdrop"></div>
+    <div class="search-modal-inner">
+      <button class="search-modal-close" id="search-modal-close" aria-label="Close">&times;</button>
+      <input type="text" class="search-modal-input" id="search-input" placeholder="Search the site..." autocomplete="off">
+      <div class="search-results" id="search-results"></div>
+    </div>
+  </div>
 </main>
 <footer class="site-footer"><div class="footer-inner"><button class="back-to-top" aria-label="Back to top"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V3"/><path d="M3 7l4-4 4 4"/></svg> Back to top </button></div></footer>
 <script src="script.js"></script>
