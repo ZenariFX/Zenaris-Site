@@ -89,3 +89,22 @@ document.addEventListener('DOMContentLoaded', () => {
     navScroll.scrollLeft = linkLeft - (containerWidth / 2) + (linkWidth / 2);
   }
 });
+
+/* Discord username copy button */
+document.addEventListener('DOMContentLoaded', () => {
+  const copyBtn = document.getElementById('discord-copy-btn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText('Zenarifx').then(() => {
+        copyBtn.classList.add('copied');
+        const label = copyBtn.querySelector('.copy-label');
+        const original = label.textContent;
+        label.textContent = 'Copied';
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          label.textContent = original;
+        }, 2000);
+      });
+    });
+  }
+});
