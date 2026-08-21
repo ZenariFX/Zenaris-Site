@@ -12,7 +12,20 @@
     <a href="socials.html" class="nav-link">Socials</a>
     <a href="about.html" class="nav-link">About</a>
     <a href="faq.html" class="nav-link">FAQ</a>
-</div></header>
+</div>
+  <div id="search-dropdown" class="search-dropdown" aria-hidden="true">
+    <div class="search-dropdown-inner">
+      <input type="text" class="search-dropdown-input" id="search-input" placeholder="Search the site..." autocomplete="off">
+      <div class="search-results" id="search-results"></div>
+    </div>
+  </div>
+  <div id="search-dropdown" class="search-dropdown" aria-hidden="true">
+    <div class="search-dropdown-inner">
+      <input type="text" class="search-dropdown-input" id="search-input" placeholder="Search the site..." autocomplete="off">
+      <div class="search-results" id="search-results"></div>
+    </div>
+  </div>
+</header>
 <main class="wrap" id="library-app">
   <nav class="lib-breadcrumb" id="lib-breadcrumb" aria-label="Breadcrumb"><button class="search-btn" id="search-btn" aria-label="Search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -114,15 +127,6 @@
     <button class="bulk-btn" id="bulk-download">Download Selected</button>
     <button class="bulk-clear" id="bulk-clear">Clear</button>
   </div>
-
-  <!-- SEARCH MODAL -->
-  <div id="search-modal" class="search-modal" aria-hidden="true">
-    <div class="search-modal-backdrop"></div>
-    <div class="search-modal-inner">
-      <button class="search-modal-close" id="search-modal-close" aria-label="Close">&times;</button>
-      <input type="text" class="search-modal-input" id="search-input" placeholder="Search the site..." autocomplete="off">
-      <div class="search-results" id="search-results"></div>
-    </div>
   </div>
 
 </main>

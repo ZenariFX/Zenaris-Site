@@ -16,27 +16,34 @@ const SITE_SEARCH_INDEX = [
   { title: "Can I request an anime", url: "faq.html", desc: "Reach out on Discord to suggest new anime for the library.", tag: "faq" },
 ];
 
-const searchModal = document.getElementById('search-modal');
+const searchDropdown = document.getElementById('search-dropdown');
 const searchInput = document.getElementById('search-input');
 const searchResults = document.getElementById('search-results');
 const searchBtn = document.getElementById('search-btn');
-const searchClose = document.getElementById('search-modal-close');
+
+function toggleSearch() {
+  if (!searchDropdown) return;
+  const isOpen = searchDropdown.classList.contains('open');
+  if (isOpen) {
+    closeSearch();
+  } else {
+    openSearch();
+  }
+}
 
 function openSearch() {
-  if (!searchModal) return;
-  searchModal.classList.add('open');
-  searchModal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
+  if (!searchDropdown) return;
+  searchDropdown.classList.add('open');
+  searchDropdown.setAttribute('aria-hidden', 'false');
   setTimeout(() => { if (searchInput) searchInput.focus(); }, 50);
 }
 
 function closeSearch() {
-  if (!searchModal) return;
-  searchModal.classList.remove('open');
-  searchModal.setAttribute('aria-hidden', 'true');
+  if (!searchDropdown) return;
+  searchDropdown.classList.remove('open');
+  searchDropdown.setAttribute('aria-hidden', 'true');
   if (searchInput) searchInput.value = '';
   if (searchResults) searchResults.innerHTML = '';
-  document.body.style.overflow = '';
 }
 
 function performSearch(query) {
@@ -61,11 +68,15 @@ function performSearch(query) {
   ).join('');
 }
 
-if (searchBtn) searchBtn.addEventListener('click', openSearch);
-if (searchClose) searchClose.addEventListener('click', closeSearch);
-if (searchModal) {
-  const backdrop = searchModal.querySelector('.search-modal-backdrop');
-  if (backdrop) backdrop.addEventListener('click', closeSearch);
+if (searchBtn) searchBtn.addEventListener('click', toggleSearch);
+if (searchDropdown) {
+  document.addEventListener('click', (e) => {
+    if (searchDropdown.classList.contains('open') &&
+        !searchDropdown.contains(e.target) &&
+        !searchBtn.contains(e.target)) {
+      closeSearch();
+    }
+  });
 }
 if (searchInput) {
   searchInput.addEventListener('input', e => performSearch(e.target.value));
@@ -75,6 +86,9 @@ document.addEventListener('keydown', e => {
   if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
     e.preventDefault();
     openSearch();
+  }
+  if (e.key === 'Escape' && searchDropdown && searchDropdown.classList.contains('open')) {
+    closeSearch();
   }
 });
 
