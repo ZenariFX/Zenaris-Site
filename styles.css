@@ -228,3 +228,29 @@ body.page-faq .particle{background:#ff6b6b}
 .search-results{max-height:50vh}
 .search-result{padding:.55rem .7rem}
 }
+
+/* ===================== HEADER NAV FIXES ===================== */
+.nav-top{position:relative;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1080px;margin:0 auto}
+.nav-top .brand{font-family:'Satisfy',cursive;font-weight:400;font-size:clamp(24px,4vw,32px);color:var(--ink);text-align:left;text-decoration:none}
+.nav-top .search-btn{position:static;transform:none;right:auto;top:auto}
+
+.nav-scroll{display:flex;align-items:center;justify-content:center;gap:6px;padding:0 24px 10px;max-width:1080px;margin:0 auto;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.nav-scroll::-webkit-scrollbar{display:none}
+.nav-link{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);padding:6px 10px;border-radius:8px;transition:all .15s ease;white-space:nowrap;text-decoration:none}
+.nav-link:hover{color:var(--ink);background:rgba(255,255,255,.04)}
+.nav-link[aria-current="page"]{color:var(--accent);background:rgba(0,229,138,.08)}
+body.page-about .nav-link[aria-current="page"]{color:#00b4d8;background:rgba(0,180,216,.08)}
+body.page-socials .nav-link[aria-current="page"]{color:#f4a261;background:rgba(244,162,97,.08)}
+body.page-clips .nav-link[aria-current="page"]{color:#c77dff;background:rgba(199,125,255,.08)}
+body.page-amvs .nav-link[aria-current="page"]{color:#ffd60a;background:rgba(255,214,10,.08)}
+body.page-faq .nav-link[aria-current="page"]{color:#ff6b6b;background:rgba(255,107,107,.08)}
+
+/* ===================== FAQ DISCORD CONTACT ===================== */
+.discord-contact{text-align:center;padding:48px 24px 64px;max-width:520px;margin:0 auto}
+.discord-contact-text{font-family:'Space Grotesk',sans-serif;font-size:16px;color:var(--ink);margin-bottom:8px}
+.discord-contact-warn{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);margin-bottom:20px;line-height:1.5}
+.discord-copy-row{display:inline-flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:10px 16px;transition:border-color .15s ease}
+.discord-copy-row:hover{border-color:var(--ink-soft)}
+.discord-icon{color:var(--ink)}
+.discord-copy-btn{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;transition:all .15s ease;display:inline-flex;align-items:center;gap:6px}
+.discord-copy-btn:hover{color:var(--accent);background:rgba(0,229,138,.08)}
