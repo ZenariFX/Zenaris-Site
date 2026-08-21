@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Anime Clips - Zenari's Page</title><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Satisfy&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=VT323&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"><meta name="theme-color" content="#c77dff"><meta property="og:site_name" content="ZenariFX"><meta property="og:title" content="Anime Clips — Zenari's Page"><meta property="og:description" content="Browse the Full Collection of Pre-Cut Anime Clips!"><meta property="og:image" content="https://zenarifx.github.io/Zenaris-Site/images/og-clips.webp"><meta property="og:url" content="https://zenarifx.github.io/Zenaris-Site/anime-clips.html"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Anime Clips — Zenari's Page"><meta name="twitter:description" content="Browse the Full Collection of Pre-Cut Anime Clips. Raw & Time Remapped."><meta name="twitter:image" content="https://zenarifx.github.io/Zenaris-Site/images/og-clips.webp"></head>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Satisfy&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=VT323&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"><meta name="theme-color" content="#c77dff"><meta property="og:site_name" content="ZenariFX"><meta property="og:title" content="Anime Clips — Zenari's Page"><meta property="og:description" content="Browse the Full Collection of Pre-Cut Anime Clips!"><meta property="og:image" content="https://zenarifx.github.io/Zenaris-Site/images/og-clips.webp"><meta property="og:url" content="https://zenarifx.github.io/Zenaris-Site/anime-clips.html"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Anime Clips — Zenari's Page"><meta name="twitter:description" content="Browse the Full Collection of Pre-Cut Anime Clips. Raw & Twixtor'd."><meta name="twitter:image" content="https://zenarifx.github.io/Zenaris-Site/images/og-clips.webp"></head>
 <body class="page-clips"><div class="particles-container"></div><header><nav class="nav-top">
   <a class="brand" href="index.html">Zenari's Page</a>
   <button class="search-btn" id="search-btn" aria-label="Search">
@@ -24,7 +24,7 @@
     <section class="clips-hero">
       <div class="terminal-badge animate-fade-up d1"><span class="terminal-prompt"></span><span class="typewriter" data-text="clips/library.txt"></span><span class="terminal-status clip-dot">Live</span></div>
       <h2 class="animate-fade-up d2">The Library</h2>
-      <p class="clips-desc animate-fade-up d3">Browse the full collection of pre-cut anime clips.<br>Use search or the filters to narrow down.</p>
+      <p class="clips-desc animate-fade-up d3">Browse the full collection of pre-cut anime clips & audios<br>Use search or the filters to narrow down.</p>
       <div class="search-bar animate-fade-up d4">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
         <input type="text" id="clip-search" placeholder="search anime..." aria-label="Search anime clips" autocomplete="off">
@@ -319,7 +319,7 @@ function renderView() {
       renderBreadcrumb([
         { label: 'Library', hash: '' },
         { label: anime.title, hash: route.anime },
-        { label: 'Time-Remapped' }
+        { label: "Twixtor'd" }
       ]);
       return;
     }
@@ -333,7 +333,7 @@ function renderView() {
       renderBreadcrumb([
         { label: 'Library', hash: '' },
         { label: anime.title, hash: route.anime },
-        { label: 'Time-Remapped', hash: `${route.anime}/timewarp` },
+        { label: "Twixtor'd", hash: `${route.anime}/timewarp` },
         { label: currentSeason.title }
       ]);
       return;
@@ -349,7 +349,7 @@ function renderView() {
     renderBreadcrumb([
       { label: 'Library', hash: '' },
       { label: anime.title, hash: route.anime },
-      { label: 'Time-Remapped', hash: `${route.anime}/timewarp` },
+      { label: "Twixtor'd", hash: `${route.anime}/timewarp` },
       { label: currentSeason.title, hash: `${route.anime}/timewarp/${route.season}` },
       { label: currentEpisode.title }
     ]);
@@ -456,7 +456,7 @@ function renderModeSelect(anime) {
   }
 
   container.innerHTML = `
-    <button class="audio-btn" data-mode="timewarp">Time-Remapped</button>
+    <button class="audio-btn" data-mode="timewarp">Twixtor'd</button>
     <button class="audio-btn" data-mode="normal">Normal</button>
     <button class="audio-btn" data-mode="audio">Audios</button>
   `;
