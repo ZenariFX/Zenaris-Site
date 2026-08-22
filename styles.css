@@ -262,6 +262,6 @@ body.page-faq .nav-link.active{color:#ff6b6b;background:rgba(255,107,107,.08)}
 .discord-copy-btn:hover{color:var(--accent);background:rgba(0,229,138,.08)}
 
 /* ===================== TYPEWRITER FIX ===================== */
-.typewriter{display:inline;white-space:nowrap;overflow:hidden;width:0;vertical-align:bottom}
-.typewriter.typing{width:100%;animation:typing var(--duration,2s) steps(var(--steps,20),end) forwards}
-@keyframes typing{from{width:0}to{width:100%}}
+.typewriter{display:inline-block;white-space:nowrap;overflow:hidden;vertical-align:bottom;clip-path:inset(0 100% 0 0)}
+.typewriter.typing{animation:typingReveal var(--duration,2s) steps(var(--steps,20),end) forwards}
+@keyframes typingReveal{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0% 0 0)}}
